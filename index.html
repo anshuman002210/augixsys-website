@@ -3,429 +3,361 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AugIx System - Enterprise Solutions & Business Automation</title>
+    <title>AugIx Sys LLP - Enterprise Automation Solutions</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'primary-blue': '#003366',
-                        'secondary-blue': '#0066CC',
-                        'accent-orange': '#FF6600',
-                        'text-dark': '#333333'
-                    }
-                }
-            }
-        }
-    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        .smooth-scroll {
-            scroll-behavior: smooth;
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        * { font-family: 'Inter', sans-serif; }
+        
+        .gradient-primary { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .gradient-secondary { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .gradient-accent { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
-        .gradient-bg {
-            background: linear-gradient(135deg, #001122 0%, #003366 50%, #0066CC 100%);
+        
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(0);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+        
+        .floating-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        .stagger-5 { animation-delay: 0.5s; }
+        .stagger-6 { animation-delay: 0.6s; }
+        
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .typing-animation {
+            overflow: hidden;
+            border-right: 3px solid #667eea;
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #667eea; }
+        }
+        
+        .logo-glow {
+            filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.3));
+        }
+        
+        .nav-blur {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+        
+        .progress-bar {
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+            transition: width 0.3s ease;
+        }
+        
+        .testimonial-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .stats-counter {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .feature-icon {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
-        .gradient-bg::before {
+        
+        .cta-button::before {
             content: '';
             position: absolute;
             top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: 
-                radial-gradient(circle at 20% 30%, rgba(0, 179, 255, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(0, 179, 255, 0.2) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(0, 179, 255, 0.15) 0%, transparent 50%);
-            opacity: 0.6;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
         }
-        .gradient-bg::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                linear-gradient(45deg, transparent 48%, rgba(0, 179, 255, 0.1) 49%, rgba(0, 179, 255, 0.1) 51%, transparent 52%),
-                linear-gradient(-45deg, transparent 48%, rgba(0, 179, 255, 0.05) 49%, rgba(0, 179, 255, 0.05) 51%, transparent 52%);
-            background-size: 60px 60px, 40px 40px;
-            animation: networkFlow 20s linear infinite;
+        
+        .cta-button:hover::before {
+            left: 100%;
         }
-        @keyframes networkFlow {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(60px, 60px); }
-        }
-        .network-nodes {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            pointer-events: none;
-        }
-        .network-node {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: #00B3FF;
-            border-radius: 50%;
-            box-shadow: 0 0 10px rgba(0, 179, 255, 0.8);
-            animation: pulse 2s infinite alternate;
-        }
-        .network-node:nth-child(1) { top: 20%; left: 15%; animation-delay: 0s; }
-        .network-node:nth-child(2) { top: 40%; left: 80%; animation-delay: 0.5s; }
-        .network-node:nth-child(3) { top: 70%; left: 25%; animation-delay: 1s; }
-        .network-node:nth-child(4) { top: 30%; left: 60%; animation-delay: 1.5s; }
-        .network-node:nth-child(5) { top: 80%; left: 70%; animation-delay: 2s; }
-        .dropdown-menu {
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 260px;
-            background: linear-gradient(to bottom, #03122b, #08213a);
-            border-radius: 6px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 1000;
-            margin-top: 8px;
-        }
-        .dropdown-menu.show {
-            opacity: 1;
-            visibility: visible;
-        }
-        .dropdown-item {
-            padding: 16px 20px;
-            color: #FFFFFF;
-            font-weight: 500;
-            font-size: 16px;
-            line-height: 1.4;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-            position: relative;
-        }
-        .dropdown-item:last-child {
-            border-bottom: none;
-        }
-        .dropdown-item:hover {
-            background: #0b3553;
-            font-weight: 600;
-        }
-        .dropdown-item.active {
-            background: #0b3553;
-            font-weight: 600;
-        }
-        .dropdown-item.active::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: #00B3FF;
-        }
-        .nav-item {
-            position: relative;
-        }
-        .hover-lift {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .hover-lift:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 51, 102, 0.15);
-        }
-        .ai-symbol {
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+        
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
         }
     </style>
 </head>
-<body class="smooth-scroll bg-white text-text-dark">
+<body class="bg-gray-50 overflow-x-hidden">
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
     <!-- Navigation -->
-    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+    <nav class="nav-blur shadow-lg sticky top-0 z-50 transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex-shrink-0">
-                    <div class="text-center">
-                        <div class="flex items-center justify-center space-x-2">
-                            <h1 class="text-2xl font-bold text-primary-blue">AugIx System</h1>
-                            <div class="text-accent-orange ai-symbol">
-                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z"/>
-                                    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.5"/>
-                                    <path d="M12 1V5M12 19V23M4.22 4.22L6.34 6.34M17.66 17.66L19.78 19.78M1 12H5M19 12H23M4.22 19.78L6.34 17.66M17.66 6.34L19.78 4.22" stroke="currentColor" stroke-width="1" opacity="0.6"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <p class="text-xs text-secondary-blue font-medium mt-1 tracking-wide italic leading-relaxed">Augmenting Human Potential With Intelligent Experiences</p>
-                    </div>
-                </div>
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-8">
-                        <a href="#home" class="text-text-dark hover:text-secondary-blue px-3 py-2 text-sm font-medium transition-colors">Home</a>
-                        <div class="nav-item">
-                            <a href="#about" class="text-text-dark hover:text-secondary-blue px-3 py-2 text-sm font-medium transition-colors" id="about-nav">About</a>
-                            <div class="dropdown-menu" id="about-dropdown">
-                                <div class="dropdown-item active" data-section="company">Our Company</div>
-                                <div class="dropdown-item" data-section="team">Core Team</div>
-                                <div class="dropdown-item" data-section="career">Career With Us</div>
-                            </div>
-                        </div>
-                        <a href="#services" class="text-text-dark hover:text-secondary-blue px-3 py-2 text-sm font-medium transition-colors">Services</a>
-                        <a href="#contact" class="text-text-dark hover:text-secondary-blue px-3 py-2 text-sm font-medium transition-colors">Contact</a>
-                        <a href="#blog" class="text-text-dark hover:text-secondary-blue px-3 py-2 text-sm font-medium transition-colors">Blog</a>
-                    </div>
-                </div>
-                <div class="md:hidden">
-                    <button id="mobile-menu-btn" class="text-text-dark hover:text-secondary-blue">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center space-x-3">
+                    <!-- Custom Logo -->
+                    <div class="logo-glow">
+                        <svg width="50" height="50" viewBox="0 0 50 50" class="text-indigo-600">
+                            <defs>
+                                <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#667eea"/>
+                                    <stop offset="100%" style="stop-color:#764ba2"/>
+                                </linearGradient>
+                            </defs>
+                            <circle cx="25" cy="25" r="23" fill="url(#logoGradient)" opacity="0.1"/>
+                            <path d="M15 20 L25 15 L35 20 L35 30 L25 35 L15 30 Z" fill="url(#logoGradient)"/>
+                            <circle cx="25" cy="25" r="4" fill="white"/>
+                            <path d="M20 12 L30 12 M12 20 L38 20 M12 30 L38 30 M20 38 L30 38" stroke="url(#logoGradient)" stroke-width="2" opacity="0.6"/>
                         </svg>
-                    </button>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">AugIx Sys</h1>
+                        <p class="text-xs text-gray-500 font-medium">LLP</p>
+                    </div>
                 </div>
+                
+                <div class="hidden lg:flex items-center space-x-8">
+                    <a href="#home" class="nav-link text-gray-700 hover:text-indigo-600 font-medium transition-colors">Home</a>
+                    <a href="#about" class="nav-link text-gray-700 hover:text-indigo-600 font-medium transition-colors">About</a>
+                    <a href="#services" class="nav-link text-gray-700 hover:text-indigo-600 font-medium transition-colors">Services</a>
+                    <a href="#solutions" class="nav-link text-gray-700 hover:text-indigo-600 font-medium transition-colors">Solutions</a>
+                    <a href="#careers" class="nav-link text-gray-700 hover:text-indigo-600 font-medium transition-colors">Careers</a>
+                    <a href="#contact" class="nav-link text-gray-700 hover:text-indigo-600 font-medium transition-colors">Contact</a>
+                    <button class="cta-button text-white px-6 py-2 rounded-full font-semibold">Get Started</button>
+                </div>
+                
+                <button class="lg:hidden text-gray-700" id="mobileMenuBtn">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
             </div>
         </div>
-        <!-- Mobile menu -->
-        <div id="mobile-menu" class="md:hidden hidden bg-white border-t">
-            <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="#home" class="block px-3 py-2 text-text-dark hover:text-secondary-blue">Home</a>
-                <a href="#about" class="block px-3 py-2 text-text-dark hover:text-secondary-blue">About</a>
-                <a href="#services" class="block px-3 py-2 text-text-dark hover:text-secondary-blue">Services</a>
-                <a href="#contact" class="block px-3 py-2 text-text-dark hover:text-secondary-blue">Contact</a>
-                <a href="#blog" class="block px-3 py-2 text-text-dark hover:text-secondary-blue">Blog</a>
+        
+        <!-- Mobile Menu -->
+        <div class="lg:hidden hidden bg-white border-t" id="mobileMenu">
+            <div class="px-4 py-6 space-y-4">
+                <a href="#home" class="block text-gray-700 font-medium">Home</a>
+                <a href="#about" class="block text-gray-700 font-medium">About</a>
+                <a href="#services" class="block text-gray-700 font-medium">Services</a>
+                <a href="#solutions" class="block text-gray-700 font-medium">Solutions</a>
+                <a href="#careers" class="block text-gray-700 font-medium">Careers</a>
+                <a href="#contact" class="block text-gray-700 font-medium">Contact</a>
+                <button class="cta-button text-white px-6 py-2 rounded-full font-semibold w-full">Get Started</button>
             </div>
         </div>
     </nav>
 
-    <!-- Home Section -->
-    <section id="home" class="pt-16">
-        <!-- Hero Section -->
-        <div class="gradient-bg text-white py-20">
-            <div class="network-nodes">
-                <div class="network-node"></div>
-                <div class="network-node"></div>
-                <div class="network-node"></div>
-                <div class="network-node"></div>
-                <div class="network-node"></div>
-            </div>
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-                <h1 class="text-4xl md:text-6xl font-bold mb-6">Innovating Enterprise Solutions with Modern Technology</h1>
-                <p class="text-xl md:text-2xl mb-8 max-w-4xl mx-auto">Empowering businesses to achieve efficiency, consistency and strategic oversight through intelligent assisted & adaptive automation.</p>
-                <p class="text-lg md:text-xl mb-10 font-semibold">Automate intelligently. Scale effortlessly.</p>
-                <div class="space-x-4">
-                    <a href="#" id="get-started-btn" class="bg-accent-orange hover:bg-orange-700 text-white px-8 py-3 rounded-lg text-lg font-semibold transition-colors inline-block">Get Started</a>
-                    <a href="#services" class="border-2 border-white text-white hover:bg-white hover:text-primary-blue px-8 py-3 rounded-lg text-lg font-semibold transition-colors inline-block">Learn More</a>
-                </div>
-            </div>
+    <!-- Hero Section -->
+    <section id="home" class="gradient-primary text-white py-20 lg:py-32 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="floating-animation absolute top-20 left-10 w-20 h-20 bg-white rounded-full"></div>
+            <div class="floating-animation absolute top-40 right-20 w-16 h-16 bg-white rounded-full" style="animation-delay: 2s;"></div>
+            <div class="floating-animation absolute bottom-20 left-1/4 w-12 h-12 bg-white rounded-full" style="animation-delay: 4s;"></div>
         </div>
-
-        <!-- Services Preview -->
-        <div class="py-16 bg-gray-50">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-primary-blue">Our Core Services</h2>
-                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <div class="bg-gradient-to-b from-[#03122b] to-[#08213a] p-6 rounded-lg shadow-md hover-lift border border-white/8">
-                        <div class="text-[#00B3FF] mb-4">
-                            <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3 text-white text-[1.15em]">Business Process Automation</h3>
-                        <p class="text-[#dfeeff] leading-relaxed">Streamline your workflows and eliminate manual tasks with intelligent automation solutions.</p>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="fade-in-up">
+                        <h1 class="text-5xl lg:text-7xl font-bold mb-6 leading-tight">
+                            Welcome to <span class="text-yellow-300">AugIx Sys</span>
+                        </h1>
                     </div>
-                    <div class="bg-gradient-to-b from-[#03122b] to-[#08213a] p-6 rounded-lg shadow-md hover-lift border border-white/8">
-                        <div class="text-[#00B3FF] mb-4">
-                            <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3 text-white text-[1.15em]">Compliance & Risk Management</h3>
-                        <p class="text-[#dfeeff] leading-relaxed">Stay compliant and reduce risks with comprehensive monitoring and management systems.</p>
+                    <div class="fade-in-up stagger-1">
+                        <p class="text-xl lg:text-2xl mb-4 typing-animation">Innovating Enterprise Solutions</p>
                     </div>
-                    <div class="bg-gradient-to-b from-[#03122b] to-[#08213a] p-6 rounded-lg shadow-md hover-lift border border-white/8">
-                        <div class="text-[#00B3FF] mb-4">
-                            <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm0 2h12v8H4V6z"/>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3 text-white text-[1.15em]">Document Management</h3>
-                        <p class="text-[#dfeeff] leading-relaxed">Organize, secure, and manage your documents with advanced digital solutions.</p>
+                    <div class="fade-in-up stagger-2">
+                        <p class="text-lg lg:text-xl mb-6 opacity-90">Empowering businesses through intelligent automation and adaptive technology solutions.</p>
                     </div>
-                    <div class="bg-gradient-to-b from-[#03122b] to-[#08213a] p-6 rounded-lg shadow-md hover-lift border border-white/8">
-                        <div class="text-[#00B3FF] mb-4">
-                            <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3 text-white text-[1.15em]">Operational Reporting</h3>
-                        <p class="text-[#dfeeff] leading-relaxed">Get real-time insights and analytics to make informed business decisions.</p>
+                    <div class="fade-in-up stagger-3">
+                        <p class="text-2xl lg:text-3xl font-bold text-yellow-300 mb-8">Automate intelligently. Scale effortlessly.</p>
+                    </div>
+                    <div class="fade-in-up stagger-4 flex flex-col sm:flex-row gap-4">
+                        <button class="bg-white text-indigo-600 px-8 py-4 rounded-full font-bold hover:bg-gray-100 transition-all transform hover:scale-105">
+                            <i class="fas fa-rocket mr-2"></i>Get Started
+                        </button>
+                        <button class="glass-effect text-white px-8 py-4 rounded-full font-bold hover:bg-white hover:bg-opacity-20 transition-all">
+                            <i class="fas fa-play mr-2"></i>Watch Demo
+                        </button>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <!-- Why Choose Us -->
-        <div class="py-16 bg-white">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-primary-blue">Why Choose AugIx Sys LLP</h2>
-                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <div class="text-center">
-                        <div class="bg-secondary-blue text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
-                            </svg>
+                
+                <div class="fade-in-up stagger-2">
+                    <div class="relative">
+                        <div class="glass-effect p-8 rounded-3xl">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-white bg-opacity-20 p-4 rounded-xl text-center">
+                                    <i class="fas fa-cogs text-3xl mb-2"></i>
+                                    <p class="font-semibold">Automation</p>
+                                </div>
+                                <div class="bg-white bg-opacity-20 p-4 rounded-xl text-center">
+                                    <i class="fas fa-shield-alt text-3xl mb-2"></i>
+                                    <p class="font-semibold">Security</p>
+                                </div>
+                                <div class="bg-white bg-opacity-20 p-4 rounded-xl text-center">
+                                    <i class="fas fa-chart-line text-3xl mb-2"></i>
+                                    <p class="font-semibold">Analytics</p>
+                                </div>
+                                <div class="bg-white bg-opacity-20 p-4 rounded-xl text-center">
+                                    <i class="fas fa-cloud text-3xl mb-2"></i>
+                                    <p class="font-semibold">Cloud Ready</p>
+                                </div>
+                            </div>
                         </div>
-                        <h3 class="text-xl font-semibold mb-2">Functionality First</h3>
-                        <p class="text-gray-600">Solutions that work reliably and deliver consistent results</p>
-                    </div>
-                    <div class="text-center">
-                        <div class="bg-secondary-blue text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 000 1.788l4 2A1 1 0 0017 13.382V15l-4-2zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788L9.553 8.658a1 1 0 00.894 0l4.764-2.382zM5.553 9.658L6 9.882v1.618a1 1 0 001.447.894l4-2A1 1 0 0012 9.618V8l-4.553-2.276a1 1 0 00-.894 0L2 7.618v1.618a1 1 0 001.447.894l2.106-1.472z"/>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-2">Integration Ready</h3>
-                        <p class="text-gray-600">Seamlessly works with your existing systems and infrastructure</p>
-                    </div>
-                    <div class="text-center">
-                        <div class="bg-secondary-blue text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"/>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-2">User Focused</h3>
-                        <p class="text-gray-600">Intuitive interfaces designed for ease of use and adoption</p>
-                    </div>
-                    <div class="text-center">
-                        <div class="bg-secondary-blue text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-2">Scalable Design</h3>
-                        <p class="text-gray-600">Solutions that grow and adapt with your business needs</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section - Company -->
-    <section id="about" class="py-16 bg-gray-50">
+    <!-- Stats Section -->
+    <section class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div id="company-section">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-primary-blue mb-6">About AugIx Sys LLP</h2>
-                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">AugIx Sys LLP was incorporated in September 2025 by professionals with extensive experience in enterprise software implementation. We understand the practical challenges organizations face in managing compliance, risk and operational processes.</p>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                <div class="fade-in-up">
+                    <div class="stats-counter" data-target="500">0</div>
+                    <p class="text-gray-600 font-medium">Projects Delivered</p>
                 </div>
-                
-                <div class="grid lg:grid-cols-2 gap-12 items-center">
-                    <div>
-                        <h3 class="text-2xl font-bold text-primary-blue mb-6">Our Mission</h3>
-                        <p class="text-gray-600 mb-8">We develop software products for business automation and process management, helping organizations reduce manual efforts while enhancing accuracy and governance control.</p>
-                        
-                        <h3 class="text-2xl font-bold text-primary-blue mb-6">Our Expertise</h3>
-                        <ul class="space-y-3">
-                            <li class="flex items-center">
-                                <svg class="w-5 h-5 text-secondary-blue mr-3" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
-                                </svg>
-                                Business process automation tools
-                            </li>
-                            <li class="flex items-center">
-                                <svg class="w-5 h-5 text-secondary-blue mr-3" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
-                                </svg>
-                                Compliance and risk management systems
-                            </li>
-                            <li class="flex items-center">
-                                <svg class="w-5 h-5 text-secondary-blue mr-3" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
-                                </svg>
-                                Document management platforms
-                            </li>
-                            <li class="flex items-center">
-                                <svg class="w-5 h-5 text-secondary-blue mr-3" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
-                                </svg>
-                                Operational reporting solutions
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <div class="bg-white p-8 rounded-lg shadow-lg">
-                        <div class="p-4 bg-gray-50 rounded-lg">
-                            <h4 class="font-semibold text-primary-blue mb-2">Company Highlights</h4>
-                            <ul class="text-sm text-gray-600 space-y-1">
-                                <li>• Incorporated: September 2025</li>
-                                <li>• Focus: Enterprise Software Solutions</li>
-                                <li>• Specialization: Business Automation</li>
-                                <li>• Approach: Practical & Results-Driven</li>
-                            </ul>
-                        </div>
-                    </div>
+                <div class="fade-in-up stagger-1">
+                    <div class="stats-counter" data-target="50">0</div>
+                    <p class="text-gray-600 font-medium">Happy Clients</p>
+                </div>
+                <div class="fade-in-up stagger-2">
+                    <div class="stats-counter" data-target="99">0</div>
+                    <p class="text-gray-600 font-medium">Uptime %</p>
+                </div>
+                <div class="fade-in-up stagger-3">
+                    <div class="stats-counter" data-target="24">0</div>
+                    <p class="text-gray-600 font-medium">Support Hours</p>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- Core Team Section -->
-            <div id="team-section" class="hidden">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-primary-blue mb-6">Our Leadership Team</h2>
-                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">Meet the visionary leader driving innovation at AugIx Sys LLP</p>
-                </div>
-                
-                <div class="max-w-4xl mx-auto">
-                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
-                        <div class="bg-gradient-to-r from-primary-blue to-secondary-blue p-8 text-white">
-                            <div class="flex items-center space-x-6">
-                                <div class="bg-white/20 rounded-full p-4">
-                                    <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                                        <circle cx="12" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="1"/>
-                                        <path d="M12 14c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z" fill="none" stroke="currentColor" stroke-width="1"/>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <div class="bg-white/10 backdrop-blur-sm rounded-lg px-6 py-3 border border-white/20">
-                                        <h3 class="text-2xl font-bold italic">NARENDRA SHUKLA</h3>
-                                        <p class="text-lg font-semibold text-accent-orange">Founder & CEO</p>
-                                    </div>
-                                </div>
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 fade-in-up">About AugIx Sys</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-indigo-600 to-purple-600 mx-auto mb-6 fade-in-up stagger-1"></div>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto fade-in-up stagger-2">
+                    Founded by enterprise software veterans, we understand the real challenges businesses face in today's digital landscape.
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="fade-in-up">
+                    <h3 class="text-3xl font-bold text-gray-900 mb-6">Our Story</h3>
+                    <div class="space-y-6 text-gray-700">
+                        <p class="text-lg leading-relaxed">
+                            AugIx Sys LLP was incorporated in September 2025 by professionals with extensive experience in enterprise software implementation. Having worked with large-scale business systems across various industries, we understand the practical challenges organizations face.
+                        </p>
+                        <p class="text-lg leading-relaxed">
+                            Our approach is grounded in real-world experience with enterprise software deployments, regulatory requirements, and the day-to-day realities of business operations.
+                        </p>
+                        <div class="flex items-center space-x-4 pt-4">
+                            <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-award text-indigo-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Industry Recognition</h4>
+                                <p class="text-gray-600">Trusted by leading enterprises worldwide</p>
                             </div>
                         </div>
-                        
-                        <div class="p-8">
-                            <div class="prose prose-lg max-w-none">
-                                <p class="text-gray-700 leading-relaxed mb-6">
-                                    <strong class="text-primary-blue">Narendra N. Shukla</strong> is the Founder & CEO of AugIx Systems, a next-generation venture dedicated to reshaping <strong class="text-emerald-600">Governance, Risk and Compliance (GRC)</strong> through the integration of emerging technologies. With nearly <em class="text-purple-600">two decades of international experience</em> across SAP Labs, IBM, and high-growth startups, he brings together technical expertise, strategic foresight, and business leadership to drive meaningful digital transformation.
-                                </p>
-                                
-                                <p class="text-gray-700 leading-relaxed mb-6">
-                                    His journey began at <strong class="text-blue-600">SAP Labs</strong>, where he quickly established himself in product development. His innovative contributions earned him the prestigious title of <em class="text-amber-600">"Development Angel"</em> from the SAP AG Board, recognizing his role in building platforms that continue to power enterprises globally. This early recognition set the tone for a career defined by <span class="text-rose-600 font-semibold">innovation and impact</span>.
-                                </p>
-                                
-                                <p class="text-gray-700 leading-relaxed mb-6">
-                                    At <strong class="text-indigo-600">IBM</strong>, Narendra spent over a decade leading critical programs in <span class="text-teal-600 font-medium">enterprise architecture, consulting, and project management</span>. Partnering with global clients, he played a key role in guiding large-scale digital transformation initiatives, bringing together technology, process, and strategy to solve complex challenges. His experience here gave him a truly <em class="text-cyan-600">global perspective</em> on enterprise operations and digital governance.
-                                </p>
-                                
-                                <p class="text-gray-700 leading-relaxed mb-6">
-                                    Embracing entrepreneurship, Narendra emerged as an <em class="text-violet-600">innovation catalyst</em>. He pioneered <strong class="text-green-600">India's first blockchain-powered experiential ticketing system</strong> in collaboration with IRCTC, delivering groundbreaking projects such as <em class="text-orange-600">Mahakumbh NFT 2025</em>, <em class="text-pink-600">Aastha 2024</em>, and the <em class="text-red-600">Holi Festive NFT Series 2024</em>. Beyond this, his leadership extended to transformative programs with <span class="text-blue-700 font-medium">Indian Railways, ONDC, and NISG</span>, where he helped reimagine governance and digital ecosystems for the public and private sectors alike.
-                                </p>
-                                
-                                <p class="text-gray-700 leading-relaxed">
-                                    Today, with <strong class="text-primary-blue">AugIx Systems</strong>, Narendra is building a next-generation GRC platform designed to <span class="text-emerald-700 font-medium">predict risks, automate compliance, and enhance transparency</span> for enterprises and governments. Guided by his philosophy of <em class="text-sky-600">"Inclusive Smart Digital Governance,"</em> he envisions technology as a driver of <span class="text-lime-600 font-semibold">empowerment, accountability, transparency, and inclusive growth</span>—reshaping the way organizations and governments operate in the digital age.
-                                </p>
+                    </div>
+                </div>
+                
+                <div class="fade-in-up stagger-1">
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="bg-white p-6 rounded-2xl shadow-lg card-hover">
+                            <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
+                                <i class="fas fa-lightbulb feature-icon text-xl"></i>
                             </div>
+                            <h4 class="font-semibold text-gray-900 mb-2">Innovation</h4>
+                            <p class="text-gray-600 text-sm">Cutting-edge solutions for modern challenges</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-lg card-hover">
+                            <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4">
+                                <i class="fas fa-users feature-icon text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-gray-900 mb-2">Expertise</h4>
+                            <p class="text-gray-600 text-sm">Deep industry knowledge and experience</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-lg card-hover">
+                            <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
+                                <i class="fas fa-handshake feature-icon text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-gray-900 mb-2">Partnership</h4>
+                            <p class="text-gray-600 text-sm">Long-term relationships with our clients</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-lg card-hover">
+                            <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mb-4">
+                                <i class="fas fa-rocket feature-icon text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-gray-900 mb-2">Growth</h4>
+                            <p class="text-gray-600 text-sm">Scalable solutions that grow with you</p>
                         </div>
                     </div>
                 </div>
@@ -434,503 +366,620 @@
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-16 bg-white">
+    <section id="services" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-primary-blue mb-6">Our Services</h2>
-                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Comprehensive enterprise solutions designed to transform your business operations</p>
+            <div class="text-center mb-16">
+                <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 fade-in-up">Our Services</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-indigo-600 to-purple-600 mx-auto mb-6 fade-in-up stagger-1"></div>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto fade-in-up stagger-2">
+                    Comprehensive automation solutions designed to transform your business operations
+                </p>
             </div>
             
-            <div class="grid lg:grid-cols-2 gap-8">
-                <div class="bg-gray-50 p-8 rounded-lg hover-lift">
-                    <div class="text-secondary-blue mb-4">
-                        <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
-                        </svg>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-100 p-8 rounded-2xl card-hover fade-in-up">
+                    <div class="w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-cogs text-white text-2xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-primary-blue mb-4">Business Process Automation</h3>
-                    <p class="text-gray-600 mb-4">Streamline your workflows and eliminate manual tasks with intelligent automation solutions.</p>
-                    <ul class="space-y-2 text-gray-600">
-                        <li>• Workflow optimization and digitization</li>
-                        <li>• Automated task scheduling and execution</li>
-                        <li>• Integration with existing business systems</li>
-                    </ul>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Process Automation</h3>
+                    <p class="text-gray-600 mb-6">Streamline workflows and eliminate manual tasks with intelligent automation solutions.</p>
+                    <a href="#" class="text-blue-600 font-semibold hover:text-blue-700 transition-colors">
+                        Learn More <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
                 </div>
                 
-                <div class="bg-gray-50 p-8 rounded-lg hover-lift">
-                    <div class="text-secondary-blue mb-4">
-                        <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
-                        </svg>
+                <div class="bg-gradient-to-br from-green-50 to-emerald-100 p-8 rounded-2xl card-hover fade-in-up stagger-1">
+                    <div class="w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-shield-alt text-white text-2xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-primary-blue mb-4">Compliance & Risk Management</h3>
-                    <p class="text-gray-600 mb-4">Stay compliant and reduce risks with comprehensive monitoring and management systems.</p>
-                    <ul class="space-y-2 text-gray-600">
-                        <li>• Regulatory compliance monitoring</li>
-                        <li>• Risk assessment and mitigation tools</li>
-                        <li>• Audit trail and reporting capabilities</li>
-                    </ul>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Compliance Management</h3>
+                    <p class="text-gray-600 mb-6">Comprehensive systems to manage regulatory requirements and operational risks.</p>
+                    <a href="#" class="text-green-600 font-semibold hover:text-green-700 transition-colors">
+                        Learn More <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
                 </div>
                 
-                <div class="bg-gray-50 p-8 rounded-lg hover-lift">
-                    <div class="text-secondary-blue mb-4">
-                        <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm0 2h12v8H4V6z"/>
-                        </svg>
+                <div class="bg-gradient-to-br from-purple-50 to-violet-100 p-8 rounded-2xl card-hover fade-in-up stagger-2">
+                    <div class="w-16 h-16 bg-purple-500 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-file-alt text-white text-2xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-primary-blue mb-4">Document Management</h3>
-                    <p class="text-gray-600 mb-4">Organize, secure, and manage your documents with advanced digital solutions.</p>
-                    <ul class="space-y-2 text-gray-600">
-                        <li>• Centralized document storage and retrieval</li>
-                        <li>• Version control and access management</li>
-                        <li>• Secure sharing and collaboration tools</li>
-                    </ul>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Document Management</h3>
+                    <p class="text-gray-600 mb-6">Secure platforms for organizing, storing, and managing business documents.</p>
+                    <a href="#" class="text-purple-600 font-semibold hover:text-purple-700 transition-colors">
+                        Learn More <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
                 </div>
                 
-                <div class="bg-gray-50 p-8 rounded-lg hover-lift">
-                    <div class="text-secondary-blue mb-4">
-                        <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/>
-                            </svg>
+                <div class="bg-gradient-to-br from-orange-50 to-red-100 p-8 rounded-2xl card-hover fade-in-up stagger-3">
+                    <div class="w-16 h-16 bg-orange-500 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-chart-bar text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Analytics & Reporting</h3>
+                    <p class="text-gray-600 mb-6">Advanced reporting solutions for strategic oversight and decision-making.</p>
+                    <a href="#" class="text-orange-600 font-semibold hover:text-orange-700 transition-colors">
+                        Learn More <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solutions Section -->
+    <section id="solutions" class="py-20 gradient-primary text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl lg:text-5xl font-bold mb-6 fade-in-up">Our Approach</h2>
+                <div class="w-24 h-1 bg-yellow-300 mx-auto mb-6 fade-in-up stagger-1"></div>
+                <p class="text-xl opacity-90 max-w-3xl mx-auto fade-in-up stagger-2">
+                    We believe in purposeful software that addresses real business needs through proven methodologies
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="glass-effect p-8 rounded-2xl card-hover fade-in-up">
+                    <div class="flex items-start space-x-6">
+                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-2xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-star text-yellow-300 text-2xl"></i>
                         </div>
-                    <h3 class="text-2xl font-bold text-primary-blue mb-4">Operational Reporting</h3>
-                    <p class="text-gray-600 mb-4">Get real-time insights and analytics to make informed business decisions.</p>
-                    <ul class="space-y-2 text-gray-600">
-                        <li>• Real-time dashboard and analytics</li>
-                        <li>• Custom report generation</li>
-                        <li>• Performance metrics and KPI tracking</li>
-                    </ul>
+                        <div>
+                            <h3 class="text-2xl font-bold mb-4">Functionality First</h3>
+                            <p class="opacity-90 leading-relaxed">Solutions that work reliably in business environments, focusing on practical outcomes over flashy features.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass-effect p-8 rounded-2xl card-hover fade-in-up stagger-1">
+                    <div class="flex items-start space-x-6">
+                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-2xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-link text-yellow-300 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold mb-4">Integration Ready</h3>
+                            <p class="opacity-90 leading-relaxed">Designed to work seamlessly with existing enterprise systems and infrastructure.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass-effect p-8 rounded-2xl card-hover fade-in-up stagger-2">
+                    <div class="flex items-start space-x-6">
+                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-2xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-user-friends text-yellow-300 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold mb-4">User Focused</h3>
+                            <p class="opacity-90 leading-relaxed">Interfaces that business users can actually use, with intuitive design and clear workflows.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass-effect p-8 rounded-2xl card-hover fade-in-up stagger-3">
+                    <div class="flex items-start space-x-6">
+                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-2xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-expand-arrows-alt text-yellow-300 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold mb-4">Scalable Design</h3>
+                            <p class="opacity-90 leading-relaxed">Built to grow with organizational needs, from small teams to enterprise-wide deployments.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 fade-in-up">What Our Clients Say</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-indigo-600 to-purple-600 mx-auto fade-in-up stagger-1"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="testimonial-card p-8 rounded-2xl shadow-lg card-hover fade-in-up">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-indigo-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900">Sarah Johnson</h4>
+                            <p class="text-gray-600 text-sm">CTO, TechCorp</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-4">"AugIx Sys transformed our operations with their intelligent automation solutions. The ROI was evident within the first quarter."</p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card p-8 rounded-2xl shadow-lg card-hover fade-in-up stagger-1">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-green-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900">Michael Chen</h4>
+                            <p class="text-gray-600 text-sm">Operations Director, GlobalCorp</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-4">"The compliance management system has streamlined our regulatory processes significantly. Highly recommended!"</p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card p-8 rounded-2xl shadow-lg card-hover fade-in-up stagger-2">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-purple-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900">Emily Rodriguez</h4>
+                            <p class="text-gray-600 text-sm">CEO, InnovateLab</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-4">"Professional team with deep expertise. Their solutions are robust, scalable, and user-friendly."</p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Careers Section -->
+    <section id="careers" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 fade-in-up">Join Our Team</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-indigo-600 to-purple-600 mx-auto mb-6 fade-in-up stagger-1"></div>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto fade-in-up stagger-2">
+                    Be part of a dynamic team that's shaping the future of enterprise automation
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="fade-in-up">
+                    <h3 class="text-3xl font-bold text-gray-900 mb-6">Why Work With Us?</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fas fa-check text-indigo-600 text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-1">Innovation-Driven Culture</h4>
+                                <p class="text-gray-600">Work on cutting-edge projects that make a real impact</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fas fa-check text-indigo-600 text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-1">Growth Opportunities</h4>
+                                <p class="text-gray-600">Continuous learning and career advancement</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fas fa-check text-indigo-600 text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-1">Work-Life Balance</h4>
+                                <p class="text-gray-600">Flexible working arrangements and comprehensive benefits</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="fade-in-up stagger-1">
+                    <div class="bg-gradient-to-br from-indigo-50 to-purple-100 p-8 rounded-2xl">
+                        <h4 class="text-2xl font-bold text-gray-900 mb-6">Open Positions</h4>
+                        <div class="space-y-4">
+                            <div class="bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h5 class="font-semibold text-gray-900">Senior Software Engineer</h5>
+                                        <p class="text-gray-600 text-sm">Full-time • Remote/Hybrid</p>
+                                    </div>
+                                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">New</span>
+                                </div>
+                            </div>
+                            <div class="bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h5 class="font-semibold text-gray-900">Product Manager</h5>
+                                        <p class="text-gray-600 text-sm">Full-time • Noida</p>
+                                    </div>
+                                    <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">Hot</span>
+                                </div>
+                            </div>
+                            <div class="bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                                <div>
+                                    <h5 class="font-semibold text-gray-900">DevOps Engineer</h5>
+                                    <p class="text-gray-600 text-sm">Full-time • Remote</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="w-full mt-6 cta-button text-white py-3 rounded-xl font-semibold">
+                            View All Positions
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-16 bg-gray-50">
+    <section id="contact" class="py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-primary-blue mb-6">Contact AugIx Sys LLP</h2>
-                <p class="text-lg text-gray-600">Get in touch with us to discuss your enterprise automation needs</p>
+            <div class="text-center mb-16">
+                <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 fade-in-up">Get In Touch</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-indigo-600 to-purple-600 mx-auto mb-6 fade-in-up stagger-1"></div>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto fade-in-up stagger-2">
+                    Ready to transform your business? Let's discuss how we can help you achieve your goals.
+                </p>
             </div>
             
-            <div class="grid lg:grid-cols-2 gap-12">
-                <div>
-                    <h3 class="text-2xl font-bold text-primary-blue mb-6">Contact Information</h3>
-                    
-                    <div class="space-y-6">
-                        <div class="flex items-start">
-                            <svg class="w-6 h-6 text-secondary-blue mt-1 mr-4" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"/>
-                            </svg>
-                            <div>
-                                <h4 class="font-semibold text-primary-blue">Address</h4>
-                                <p class="text-gray-600">Plot Number A4, Logix Technova Sector 132<br>
-                                Maharishi Nagar, Expressway Police Station<br>
-                                Noida, Gautam Buddha Nagar - 201304<br>
-                                Uttar Pradesh</p>
+            <div class="grid lg:grid-cols-2 gap-16">
+                <div class="fade-in-up">
+                    <div class="bg-white p-8 rounded-2xl shadow-lg">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Send us a message</h3>
+                        <form class="space-y-6">
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-gray-700 font-medium mb-2">First Name</label>
+                                    <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 font-medium mb-2">Last Name</label>
+                                    <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all">
+                                </div>
                             </div>
-                        </div>
-                        
-                        <div class="flex items-start">
-                            <svg class="w-6 h-6 text-secondary-blue mt-1 mr-4" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
-                            </svg>
                             <div>
-                                <h4 class="font-semibold text-primary-blue">Phone</h4>
-                                <a href="tel:9667609655" class="text-secondary-blue hover:underline">9667609655</a>
+                                <label class="block text-gray-700 font-medium mb-2">Email</label>
+                                <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all">
                             </div>
-                        </div>
-                        
-                        <div class="flex items-start">
-                            <svg class="w-6 h-6 text-secondary-blue mt-1 mr-4" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
-                                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
-                            </svg>
                             <div>
-                                <h4 class="font-semibold text-primary-blue">Email</h4>
-                                <a href="mailto:info@augixsys.com?subject=Inquiry%20about%20AugIx%20Sys%20Services&body=Hello%20AugIx%20Sys%20Team,%0A%0AI%20am%20interested%20in%20learning%20more%20about%20your%20enterprise%20solutions.%20Please%20contact%20me%20to%20discuss%20my%20requirements.%0A%0AThank%20you." class="text-secondary-blue hover:underline">info@augixsys.com</a>
+                                <label class="block text-gray-700 font-medium mb-2">Company</label>
+                                <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all">
                             </div>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-8 p-6 bg-white rounded-lg shadow-md">
-                        <h4 class="font-semibold text-primary-blue mb-4">Registration Details</h4>
-                        <div class="space-y-2 text-sm text-gray-600">
-                            <p><span class="font-medium">LLP Identification Number:</span> ACR-1200</p>
-                            <p><span class="font-medium">PAN:</span> ACLFA2847A</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="relative p-8 rounded-lg shadow-lg overflow-hidden" style="background: rgba(3,18,43,0.06);">
-                    <!-- Large 3D glass paper-plane watermark -->
-                    <div class="absolute right-8 top-1/2 transform -translate-y-1/2 opacity-8 pointer-events-none">
-                        <svg class="w-40 h-40 text-[#00B3FF]" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="filter: blur(4px) drop-shadow(0 0 12px rgba(0, 179, 255, 0.2));">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 12h18M12 3v18" opacity="0.4"/>
-                            <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="0.5" opacity="0.3" fill="none"/>
-                        </svg>
-                    </div>
-                    
-                    <div class="relative z-10">
-                        <h3 class="text-2xl font-bold mb-6" style="color: #03122b;">Send us a Message</h3>
-                        <form id="contact-form" class="space-y-6">
                             <div>
-                                <label for="name" class="block text-sm font-medium mb-2" style="color: #0b3553;">Name *</label>
-                                <input type="text" id="name" name="name" required class="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-blue focus:border-transparent" style="color: #03122b;" placeholder="Enter your full name">
+                                <label class="block text-gray-700 font-medium mb-2">Message</label>
+                                <textarea rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"></textarea>
                             </div>
-                            
-                            <div>
-                                <label for="email" class="block text-sm font-medium mb-2" style="color: #0b3553;">Email *</label>
-                                <input type="email" id="email" name="email" required class="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-blue focus:border-transparent" style="color: #03122b;" placeholder="your.email@example.com">
-                            </div>
-                            
-                            <div>
-                                <label for="phone" class="block text-sm font-medium mb-2" style="color: #0b3553;">Phone</label>
-                                <input type="tel" id="phone" name="phone" class="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-blue focus:border-transparent" style="color: #03122b;" placeholder="Your phone number">
-                            </div>
-                            
-                            <div>
-                                <label for="message" class="block text-sm font-medium mb-2" style="color: #0b3553;">Message *</label>
-                                <textarea id="message" name="message" rows="4" required class="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-blue focus:border-transparent" style="color: #03122b;" placeholder="Tell us about your requirements..."></textarea>
-                            </div>
-                            
-                            <button type="submit" class="w-full bg-accent-orange hover:bg-orange-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
-                                Send Message
+                            <button type="submit" class="w-full cta-button text-white py-4 rounded-xl font-semibold">
+                                Send Message <i class="fas fa-paper-plane ml-2"></i>
                             </button>
                         </form>
+                    </div>
+                </div>
+                
+                <div class="fade-in-up stagger-1">
+                    <div class="space-y-8">
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-6">Contact Information</h3>
+                            <div class="space-y-6">
+                                <div class="flex items-start space-x-4">
+                                    <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-map-marker-alt text-indigo-600"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-900 mb-1">Address</h4>
+                                        <p class="text-gray-600">Plot Number A4, Logix Technova Sector 132<br>
+                                        Maharishi Nagar, Expressway Police Station<br>
+                                        Noida, Gautam Buddha Nagar - 201304, UP</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start space-x-4">
+                                    <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-phone text-green-600"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-900 mb-1">Phone</h4>
+                                        <p class="text-gray-600">+91 9667609655</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start space-x-4">
+                                    <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-envelope text-blue-600"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-900 mb-1">Email</h4>
+                                        <p class="text-gray-600">info@augixsys.com</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         
-                        <div class="mt-4 p-3 bg-blue-50 rounded-lg">
-                            <p class="text-sm" style="color: #546178;">
-                                <strong style="color: #0b3553;">Note:</strong> Your message will be sent directly to our team. We typically respond within 24 hours during business days.
-                            </p>
+                        <div class="bg-gradient-to-br from-indigo-50 to-purple-100 p-6 rounded-2xl">
+                            <h4 class="font-bold text-gray-900 mb-4">Business Hours</h4>
+                            <div class="space-y-2 text-gray-600">
+                                <div class="flex justify-between">
+                                    <span>Monday - Friday</span>
+                                    <span>9:00 AM - 6:00 PM</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Saturday</span>
+                                    <span>10:00 AM - 4:00 PM</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Sunday</span>
+                                    <span>Closed</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-2xl shadow-lg">
+                            <h4 class="font-bold text-gray-900 mb-4">Registration Details</h4>
+                            <div class="space-y-3 text-gray-600">
+                                <div>
+                                    <span class="font-medium text-gray-900">LLP ID:</span> ACR-1200
+                                </div>
+                                <div>
+                                    <span class="font-medium text-gray-900">PAN:</span> ACLFA2847A
+                                </div>
+                                <div>
+                                    <span class="font-medium text-gray-900">Incorporated:</span> September 2025
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Blog Section -->
-    <section id="blog" class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-primary-blue mb-6">Blog & Insights</h2>
-                <p class="text-lg text-gray-600 mb-8">Stay updated with the latest trends in enterprise automation and technology</p>
-            </div>
-            
-            <!-- Newsletter Banner -->
-            <div class="relative rounded-2xl shadow-xl overflow-hidden mb-8" style="aspect-ratio: 16/4; background: #020b18;">
-                <!-- Translucent glass panel -->
-                <div class="absolute inset-0 bg-gradient-to-r from-[#0d1f33] to-[#0d1f33] opacity-15 backdrop-blur-sm"></div>
-                
-                <!-- Neon paper plane watermark -->
-                <div class="absolute right-12 top-1/2 transform -translate-y-1/2 opacity-4">
-                    <svg class="w-32 h-32 text-[#00B3FF]" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="filter: drop-shadow(0 0 8px rgba(0, 179, 255, 0.3));">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="0.8" d="M3 12h18M12 3v18" opacity="0.3"/>
-                    </svg>
-                </div>
-                
-                <div class="relative z-10 h-full flex items-center justify-between px-8 md:px-12">
-                    <div class="flex-1">
-                        <h3 class="text-2xl md:text-3xl font-bold text-white mb-2" style="text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);">Get updates from AugIx Sys</h3>
-                        <p class="text-lg text-[#7dd3ff] opacity-90">Latest insights on enterprise automation</p>
-                    </div>
-                    
-                    <div class="flex items-center space-x-4 ml-8">
-                        <div class="relative">
-                            <input type="email" placeholder="Enter your email" class="w-64 px-4 py-3 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 focus:ring-2 focus:ring-[#00B3FF] focus:border-transparent text-white placeholder-[#aaa] transition-all duration-300" style="box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1);">
-                        </div>
-                        <button class="bg-[#00B3FF] hover:bg-[#0099cc] text-white px-6 py-3 rounded-lg font-bold transition-all duration-300 whitespace-nowrap shadow-lg" style="box-shadow: 0 0 20px rgba(0, 179, 255, 0.4); text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);">
-                            Subscribe
-                        </button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="relative bg-gradient-to-br from-[#f8fafc] to-[#e2e8f0] p-12 rounded-2xl shadow-lg border border-white/50 overflow-hidden">
-                <!-- Animated background elements -->
-                <div class="absolute inset-0 opacity-5">
-                    <div class="absolute top-4 left-4 w-2 h-2 bg-[#00B3FF] rounded-full animate-pulse"></div>
-                    <div class="absolute top-8 right-8 w-1 h-1 bg-[#00B3FF] rounded-full animate-pulse" style="animation-delay: 0.5s;"></div>
-                    <div class="absolute bottom-6 left-12 w-1.5 h-1.5 bg-[#00B3FF] rounded-full animate-pulse" style="animation-delay: 1s;"></div>
-                    <div class="absolute bottom-12 right-6 w-1 h-1 bg-[#00B3FF] rounded-full animate-pulse" style="animation-delay: 1.5s;"></div>
-                </div>
-                
-                <!-- Floating icon with animation -->
-                <div class="relative mb-6">
-                    <div class="w-20 h-20 mx-auto bg-gradient-to-br from-[#00B3FF] to-[#0099cc] rounded-2xl flex items-center justify-center shadow-xl transform hover:scale-105 transition-all duration-300" style="animation: float 3s ease-in-out infinite;">
-                        <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"/>
-                            <path d="M6 12a2 2 0 002 2h4a2 2 0 002-2V8a2 2 0 00-2-2H8a2 2 0 00-2 2v4z" opacity="0.6"/>
-                        </svg>
-                    </div>
-                    <!-- Glow effect -->
-                    <div class="absolute inset-0 w-20 h-20 mx-auto bg-[#00B3FF] rounded-2xl opacity-20 blur-xl"></div>
-                </div>
-                
-                <div class="text-center relative z-10">
-                    <h3 class="text-2xl font-bold text-[#1e293b] mb-4">
-                        <span class="bg-gradient-to-r from-[#00B3FF] to-[#0099cc] bg-clip-text text-transparent">Coming Soon</span>
-                    </h3>
-                    <p class="text-[#64748b] leading-relaxed max-w-2xl mx-auto mb-6">
-                        We're crafting valuable content about <span class="font-semibold text-[#475569]">enterprise automation</span>, 
-                        <span class="font-semibold text-[#475569]">best practices</span>, and 
-                        <span class="font-semibold text-[#475569]">industry insights</span>. 
-                        Our expert team is preparing comprehensive articles and thought leadership pieces.
-                    </p>
-                    
-                    <!-- Progress indicator -->
-                    <div class="flex items-center justify-center space-x-2 mb-4">
-                        <div class="w-2 h-2 bg-[#00B3FF] rounded-full animate-bounce"></div>
-                        <div class="w-2 h-2 bg-[#00B3FF] rounded-full animate-bounce" style="animation-delay: 0.1s;"></div>
-                        <div class="w-2 h-2 bg-[#00B3FF] rounded-full animate-bounce" style="animation-delay: 0.2s;"></div>
-                    </div>
-                    
-                    <p class="text-sm text-[#94a3b8] font-medium">
-                        📝 Content in development • 🚀 Launching soon
-                    </p>
-                </div>
-                
-                <!-- Decorative elements -->
-                <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[#00B3FF]/10 to-transparent rounded-full blur-2xl"></div>
-                <div class="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-[#0099cc]/10 to-transparent rounded-full blur-xl"></div>
-            </div>
-            
-            <style>
-                @keyframes float {
-                    0%, 100% { transform: translateY(0px); }
-                    50% { transform: translateY(-10px); }
-                }
-            </style>
-        </div>
-    </section>
-
-    <!-- Career Application Modal -->
-    <div id="career-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <div class="p-6">
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-2xl font-bold text-primary-blue">Career Application</h3>
-                    <button id="close-career-modal" class="text-gray-500 hover:text-gray-700">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                        </svg>
-                    </button>
-                </div>
-                
-                <form id="career-form" class="space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
-                            <input type="text" id="applicant-name" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-secondary-blue focus:border-transparent" placeholder="Enter your full name">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Email Address *</label>
-                            <input type="email" id="applicant-email" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-secondary-blue focus:border-transparent" placeholder="your.email@example.com">
-                        </div>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
-                            <input type="tel" id="applicant-phone" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-secondary-blue focus:border-transparent" placeholder="+91 9876543210">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Current Location *</label>
-                            <input type="text" id="applicant-location" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-secondary-blue focus:border-transparent" placeholder="City, State">
-                        </div>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Position Applied For *</label>
-                            <select id="position" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-secondary-blue focus:border-transparent">
-                                <option value="">Select Position</option>
-                                <option value="Software Developer">Software Developer</option>
-                                <option value="Business Analyst">Business Analyst</option>
-                                <option value="Project Manager">Project Manager</option>
-                                <option value="UI/UX Designer">UI/UX Designer</option>
-                                <option value="DevOps Engineer">DevOps Engineer</option>
-                                <option value="Quality Assurance">Quality Assurance</option>
-                                <option value="Sales Executive">Sales Executive</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Experience Level *</label>
-                            <select id="experience" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-secondary-blue focus:border-transparent">
-                                <option value="">Select Experience</option>
-                                <option value="Fresher">Fresher (0-1 years)</option>
-                                <option value="Junior">Junior (1-3 years)</option>
-                                <option value="Mid-Level">Mid-Level (3-6 years)</option>
-                                <option value="Senior">Senior (6-10 years)</option>
-                                <option value="Lead">Lead (10+ years)</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Current/Expected Salary (Annual) *</label>
-                        <input type="text" id="salary" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-secondary-blue focus:border-transparent" placeholder="e.g., 8-12 LPA">
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Key Skills *</label>
-                        <textarea id="skills" rows="3" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-secondary-blue focus:border-transparent" placeholder="List your key technical and soft skills (e.g., Java, Python, Project Management, Communication)"></textarea>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Why do you want to join AugIx Sys? *</label>
-                        <textarea id="motivation" rows="4" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-secondary-blue focus:border-transparent" placeholder="Tell us what interests you about our company and this role"></textarea>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Upload Resume *</label>
-                        <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-secondary-blue transition-colors">
-                            <input type="file" id="resume-upload" accept=".pdf" required class="hidden">
-                            <div id="upload-area" class="cursor-pointer">
-                                <svg class="w-12 h-12 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 48 48">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"/>
-                                </svg>
-                                <p class="text-gray-600 mb-2">Click to upload your resume</p>
-                                <p class="text-sm text-gray-500">PDF format only, max 4MB</p>
-                            </div>
-                            <div id="file-info" class="hidden">
-                                <svg class="w-8 h-8 text-green-500 mx-auto mb-2" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
-                                </svg>
-                                <p id="file-name" class="text-green-600 font-medium"></p>
-                                <p class="text-sm text-gray-500">File uploaded successfully</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="flex space-x-4 pt-4">
-                        <button type="submit" class="flex-1 bg-accent-orange hover:bg-orange-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
-                            Submit Application
-                        </button>
-                        <button type="button" id="cancel-career" class="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
-                            Cancel
-                        </button>
-                    </div>
-                </form>
-                
-                <div class="mt-4 p-3 bg-blue-50 rounded-lg">
-                    <p class="text-sm text-blue-800">
-                        <strong>Note:</strong> Your application will be sent to our HR team at careers@augixsys.com. We'll review your application and get back to you within 5-7 business days.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Email Modal -->
-    <div id="email-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <div class="p-6">
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-2xl font-bold text-primary-blue">Send Email to AugIx Sys LLP</h3>
-                    <button id="close-modal" class="text-gray-500 hover:text-gray-700">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                        </svg>
-                    </button>
-                </div>
-                
-                <form id="email-form" class="space-y-4">
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">To:</label>
-                            <input type="email" value="info@augixsys.com" readonly class="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50 text-gray-600">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">From: *</label>
-                            <input type="email" id="sender-email" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-secondary-blue focus:border-transparent" placeholder="your.email@example.com">
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Subject: *</label>
-                        <input type="text" id="email-subject" value="Get Started - Enterprise Solutions Inquiry" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-secondary-blue focus:border-transparent">
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Your Name: *</label>
-                        <input type="text" id="sender-name" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-secondary-blue focus:border-transparent" placeholder="Your full name">
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Company:</label>
-                        <input type="text" id="sender-company" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-secondary-blue focus:border-transparent" placeholder="Your company name">
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Phone:</label>
-                        <input type="tel" id="sender-phone" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-secondary-blue focus:border-transparent" placeholder="Your phone number">
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Message: *</label>
-                        <textarea id="email-message" rows="8" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-secondary-blue focus:border-transparent" placeholder="Hello AugIx Sys Team,
-
-I am interested in getting started with your enterprise solutions. Please provide me with:
-
-• Information about your services
-• Pricing details  
-• Implementation timeline
-• Next steps
-
-Best regards"></textarea>
-                    </div>
-                    
-                    <div class="flex space-x-4 pt-4">
-                        <button type="submit" class="flex-1 bg-accent-orange hover:bg-orange-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
-                            Send Email
-                        </button>
-                        <button type="button" id="cancel-email" class="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
-                            Cancel
-                        </button>
-                    </div>
-                </form>
-                
-                <div class="mt-4 p-3 bg-blue-50 rounded-lg">
-                    <p class="text-sm text-blue-800">
-                        <strong>Note:</strong> This will open your default email client with the pre-filled message. If it doesn't work, please copy the details and send manually to info@augixsys.com
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Footer -->
-    <footer class="gradient-bg text-white py-12">
+    <footer class="bg-gray-900 text-white py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-3 gap-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
                 <div>
-                    <h3 class="text-2xl font-bold mb-4">AugIx Sys LLP</h3>
-                    <p class="text-gray-300 mb-4">Innovating Enterprise Solutions with Modern Technology</p>
-                    <p class="text-sm text-gray-400">Automate intelligently. Scale effortlessly.</p>
+                    <div class="flex items-center space-x-3 mb-6">
+                        <svg width="40" height="40" viewBox="0 0 50 50" class="text-indigo-400">
+                            <defs>
+                                <linearGradient id="footerLogoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#667eea"/>
+                                    <stop offset="100%" style="stop-color:#764ba2"/>
+                                </linearGradient>
+                            </defs>
+                            <circle cx="25" cy="25" r="23" fill="url(#footerLogoGradient)" opacity="0.1"/>
+                            <path d="M15 20 L25 15 L35 20 L35 30 L25 35 L15 30 Z" fill="url(#footerLogoGradient)"/>
+                            <circle cx="25" cy="25" r="4" fill="white"/>
+                        </svg>
+                        <div>
+                            <h3 class="text-xl font-bold">AugIx Sys LLP</h3>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-6">Empowering businesses through intelligent automation and innovative technology solutions.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-indigo-600 transition-colors">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-indigo-600 transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-indigo-600 transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    </div>
                 </div>
                 
                 <div>
-                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#home" class="text-gray-300 hover:text-white transition-colors">Home</a></li>
-                        <li><a href="#about" class="text-gray-300 hover:text-white transition-colors">About</a></li>
-                        <li><a href="#services" class="text-gray-300 hover:text-white transition-colors">Services</a></li>
-                        <li><a href="#contact" class="text-gray-300 hover:text-white transition-colors">Contact</a></li>
+                    <h4 class="text-lg font-semibold mb-6">Services</h4>
+                    <ul class="space-y-3 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Process Automation</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Compliance Management</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Document Management</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Analytics & Reporting</a></li>
                     </ul>
                 </div>
                 
                 <div>
-                    <h4 class="text-lg font-semibold mb-4">Contact Info</h4>
-                    <div class="space-y-2 text-gray-300">
-                        <p>📍 Noida, Uttar Pradesh</p>
-                        <p>📞 <a href="tel:9667609655" class="hover:text-white">9667609655</a></p>
-                        <p>✉ <a href="mailto:info@augixsys.com?subject=Inquiry%20about%20AugIx%20Sys%20Services&body=Hello%20AugIx%20Sys%20Team,%0A%0AI%20am%20interested%20in%20learning%20more%20about%20your%20enterprise%20soluti
+                    <h4 class="text-lg font-semibold mb-6">Company</h4>
+                    <ul class="space-y-3 text-gray-400">
+                        <li><a href="#about" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#careers" class="hover:text-white transition-colors">Careers</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">News & Updates</a></li>
+                        <li><a href="#contact" class="hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Support</h4>
+                    <ul class="space-y-3 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Documentation</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="section-divider mb-8"></div>
+            
+            <div class="text-center text-gray-400">
+                <p>&copy; 2025 AugIx Sys LLP. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Progress bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+
+        // Mobile menu
+        document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    document.getElementById('mobileMenu').classList.add('hidden');
+                }
+            });
+        });
+
+        // Active nav link
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('text-indigo-600');
+                link.classList.add('text-gray-700');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.remove('text-gray-700');
+                    link.classList.add('text-indigo-600');
+                }
+            });
+        });
+
+        // Stats counter animation
+        const observerOptions = {
+            threshold: 0.7,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = parseInt(counter.getAttribute('data-target'));
+                    const increment = target / 100;
+                    let current = 0;
+                    
+                    const updateCounter = () => {
+                        if (current < target) {
+                            current += increment;
+                            counter.textContent = Math.ceil(current);
+                            setTimeout(updateCounter, 20);
+                        } else {
+                            counter.textContent = target;
+                        }
+                    };
+                    
+                    updateCounter();
+                    observer.unobserve(counter);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.stats-counter').forEach(counter => {
+            observer.observe(counter);
+        });
+
+        // Form submission
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+        });
+
+        // CTA buttons and other interactive elements
+        document.querySelectorAll('.cta-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (this.textContent.includes('Get Started')) {
+                    document.querySelector('#contact').scrollIntoView({ behavior: 'smooth' });
+                } else if (this.textContent.includes('Watch Demo')) {
+                    alert('Demo video coming soon! Contact us for a personalized demonstration.');
+                } else if (this.textContent.includes('View All Positions')) {
+                    alert('Visit our careers portal or contact HR at careers@augixsys.com for current openings.');
+                }
+            });
+        });
+
+        // Learn More buttons
+        document.querySelectorAll('a[href="#"]').forEach(link => {
+            if (link.textContent.includes('Learn More')) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const serviceName = this.closest('.card-hover').querySelector('h3').textContent;
+                    alert(`Learn more about ${serviceName}:\n\nContact us at info@augixsys.com or call +91 9667609655 for detailed information about this service.`);
+                });
+            }
+        });
+
+        // Hero section buttons
+        document.querySelectorAll('button').forEach(button => {
+            if (button.textContent.includes('Get Started') && !button.classList.contains('cta-button')) {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector('#contact').scrollIntoView({ behavior: 'smooth' });
+                });
+            } else if (button.textContent.includes('Watch Demo')) {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('🎥 Demo Video\n\nSee AugIx Sys solutions in action! Contact us to schedule a personalized demo:\n\n📧 info@augixsys.com\n📞 +91 9667609655');
+                });
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97e53c2142b1599c',t:'MTc1Nzc0MTI0MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
 
         
-           
+        
+ 
+                      
+       
 
+           
+                      
+
+                
+   
+                       
+                

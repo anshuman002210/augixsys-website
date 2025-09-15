@@ -148,6 +148,32 @@
             0%, 100% { opacity: 1; }
             50% { opacity: 0.7; }
         }
+        .whatsapp-float {
+            animation: whatsappPulse 2s infinite;
+            box-shadow: 0 4px 20px rgba(34, 197, 94, 0.4);
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(34, 197, 94, 0.6);
+        }
+        @keyframes whatsappPulse {
+            0%, 100% { box-shadow: 0 4px 20px rgba(34, 197, 94, 0.4); }
+            50% { box-shadow: 0 4px 20px rgba(34, 197, 94, 0.7), 0 0 0 10px rgba(34, 197, 94, 0.1); }
+        }
+        .page-section {
+            display: none;
+        }
+        .page-section.active {
+            display: block;
+        }
+        .nav-link.active {
+            color: #0066CC !important;
+            font-weight: 600;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
     </style>
 </head>
 <body class="smooth-scroll bg-white text-text-dark">
@@ -157,33 +183,27 @@
             <div class="flex justify-between items-center h-16">
                 <div class="flex-shrink-0">
                     <div class="text-center">
-                        <div class="flex items-center justify-center space-x-2">
-                            <h1 class="text-2xl font-bold text-primary-blue">AugIx System</h1>
-                            <div class="text-accent-orange ai-symbol">
-                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z"/>
-                                    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.5"/>
-                                    <path d="M12 1V5M12 19V23M4.22 4.22L6.34 6.34M17.66 17.66L19.78 19.78M1 12H5M19 12H23M4.22 19.78L6.34 17.66M17.66 6.34L19.78 4.22" stroke="currentColor" stroke-width="1" opacity="0.6"/>
-                                </svg>
-                            </div>
+                        <div class="flex items-center justify-center">
+                            <img src="https://i.imgur.com/AugIx_System_Logo_Last.png" alt="AugIx System Logo" class="h-12 w-auto" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                            <h1 class="text-2xl font-bold text-primary-blue hidden">AugIx System</h1>
                         </div>
-                        <p class="text-xs text-secondary-blue font-medium mt-1 tracking-wide italic leading-relaxed">Augmenting Human Potential With Intelligent Experiences</p>
+                        <p class="text-xs text-secondary-blue font-medium mt-1 tracking-wide italic leading-relaxed">Trusted Processes, Intelligent Results</p>
                     </div>
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-8">
-                        <a href="#home" class="text-text-dark hover:text-secondary-blue px-3 py-2 text-sm font-medium transition-colors">Home</a>
+                        <a href="#" onclick="showSection('home')" class="nav-link active text-text-dark hover:text-secondary-blue px-3 py-2 text-sm font-medium transition-colors" data-section="home">Home</a>
                         <div class="nav-item">
-                            <a href="#about" class="text-text-dark hover:text-secondary-blue px-3 py-2 text-sm font-medium transition-colors" id="about-nav">About</a>
+                            <a href="#" onclick="showSection('about')" class="nav-link text-text-dark hover:text-secondary-blue px-3 py-2 text-sm font-medium transition-colors" id="about-nav" data-section="about">About</a>
                             <div class="dropdown-menu" id="about-dropdown">
                                 <div class="dropdown-item active" data-section="company">Our Company</div>
                                 <div class="dropdown-item" data-section="team">Core Team</div>
                                 <div class="dropdown-item" data-section="career">Career With Us</div>
                             </div>
                         </div>
-                        <a href="#services" class="text-text-dark hover:text-secondary-blue px-3 py-2 text-sm font-medium transition-colors">Services</a>
-                        <a href="#contact" class="text-text-dark hover:text-secondary-blue px-3 py-2 text-sm font-medium transition-colors">Contact</a>
-                        <a href="#blog" class="text-text-dark hover:text-secondary-blue px-3 py-2 text-sm font-medium transition-colors">Blog</a>
+                        <a href="#" onclick="showSection('services')" class="nav-link text-text-dark hover:text-secondary-blue px-3 py-2 text-sm font-medium transition-colors" data-section="services">Services</a>
+                        <a href="#" onclick="showSection('contact')" class="nav-link text-text-dark hover:text-secondary-blue px-3 py-2 text-sm font-medium transition-colors" data-section="contact">Contact</a>
+                        <a href="#" onclick="showSection('blog')" class="nav-link text-text-dark hover:text-secondary-blue px-3 py-2 text-sm font-medium transition-colors" data-section="blog">Blog</a>
                     </div>
                 </div>
                 <div class="md:hidden">
@@ -198,17 +218,17 @@
         <!-- Mobile menu -->
         <div id="mobile-menu" class="md:hidden hidden bg-white border-t">
             <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="#home" class="block px-3 py-2 text-text-dark hover:text-secondary-blue">Home</a>
-                <a href="#about" class="block px-3 py-2 text-text-dark hover:text-secondary-blue">About</a>
-                <a href="#services" class="block px-3 py-2 text-text-dark hover:text-secondary-blue">Services</a>
-                <a href="#contact" class="block px-3 py-2 text-text-dark hover:text-secondary-blue">Contact</a>
-                <a href="#blog" class="block px-3 py-2 text-text-dark hover:text-secondary-blue">Blog</a>
+                <a href="#" onclick="showSection('home')" class="block px-3 py-2 text-text-dark hover:text-secondary-blue">Home</a>
+                <a href="#" onclick="showSection('about')" class="block px-3 py-2 text-text-dark hover:text-secondary-blue">About</a>
+                <a href="#" onclick="showSection('services')" class="block px-3 py-2 text-text-dark hover:text-secondary-blue">Services</a>
+                <a href="#" onclick="showSection('contact')" class="block px-3 py-2 text-text-dark hover:text-secondary-blue">Contact</a>
+                <a href="#" onclick="showSection('blog')" class="block px-3 py-2 text-text-dark hover:text-secondary-blue">Blog</a>
             </div>
         </div>
     </nav>
 
     <!-- Home Section -->
-    <section id="home" class="pt-16">
+    <section id="home" class="pt-16 page-section active">
         <!-- Hero Section -->
         <div class="gradient-bg text-white py-20">
             <div class="network-nodes">
@@ -224,7 +244,7 @@
                 <p class="text-lg md:text-xl mb-10 font-semibold">Automate intelligently. Scale effortlessly.</p>
                 <div class="space-x-4">
                     <a href="#" id="get-started-btn" class="bg-accent-orange hover:bg-orange-700 text-white px-8 py-3 rounded-lg text-lg font-semibold transition-colors inline-block">Get Started</a>
-                    <a href="#services" class="border-2 border-white text-white hover:bg-white hover:text-primary-blue px-8 py-3 rounded-lg text-lg font-semibold transition-colors inline-block">Learn More</a>
+                    <a href="#" onclick="showSection('services')" class="border-2 border-white text-white hover:bg-white hover:text-primary-blue px-8 py-3 rounded-lg text-lg font-semibold transition-colors inline-block">Learn More</a>
                 </div>
             </div>
         </div>
@@ -277,7 +297,7 @@
         <!-- Why Choose Us -->
         <div class="py-16 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-primary-blue">Why Choose AugIx Sys LLP</h2>
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-primary-blue">Why Choose AugIx System</h2>
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                     <div class="text-center">
                         <div class="bg-secondary-blue text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -285,7 +305,7 @@
                                 <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
                             </svg>
                         </div>
-                        <h3 class="text-xl font-semibold mb-2">Functionality First</h3>
+                        <h3 class="text-xl font-semibold mb-2 text-primary-blue">Functionality First</h3>
                         <p class="text-gray-600">Solutions that work reliably and deliver consistent results</p>
                     </div>
                     <div class="text-center">
@@ -294,7 +314,7 @@
                                 <path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 000 1.788l4 2A1 1 0 0017 13.382V15l-4-2zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788L9.553 8.658a1 1 0 00.894 0l4.764-2.382zM5.553 9.658L6 9.882v1.618a1 1 0 001.447.894l4-2A1 1 0 0012 9.618V8l-4.553-2.276a1 1 0 00-.894 0L2 7.618v1.618a1 1 0 001.447.894l2.106-1.472z"/>
                             </svg>
                         </div>
-                        <h3 class="text-xl font-semibold mb-2">Integration Ready</h3>
+                        <h3 class="text-xl font-semibold mb-2 text-primary-blue">Integration Ready</h3>
                         <p class="text-gray-600">Seamlessly works with your existing systems and infrastructure</p>
                     </div>
                     <div class="text-center">
@@ -303,7 +323,7 @@
                                 <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"/>
                             </svg>
                         </div>
-                        <h3 class="text-xl font-semibold mb-2">User Focused</h3>
+                        <h3 class="text-xl font-semibold mb-2 text-primary-blue">User Focused</h3>
                         <p class="text-gray-600">Intuitive interfaces designed for ease of use and adoption</p>
                     </div>
                     <div class="text-center">
@@ -312,7 +332,7 @@
                                 <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
                             </svg>
                         </div>
-                        <h3 class="text-xl font-semibold mb-2">Scalable Design</h3>
+                        <h3 class="text-xl font-semibold mb-2 text-primary-blue">Scalable Design</h3>
                         <p class="text-gray-600">Solutions that grow and adapt with your business needs</p>
                     </div>
                 </div>
@@ -320,13 +340,13 @@
         </div>
     </section>
 
-    <!-- About Section - Company -->
-    <section id="about" class="py-16 bg-gray-50">
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-gray-50 page-section">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div id="company-section">
                 <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-primary-blue mb-6">About AugIx Sys LLP</h2>
-                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">AugIx Sys LLP was incorporated in September 2025 by professionals with extensive experience in enterprise software implementation. We understand the practical challenges organizations face in managing compliance, risk and operational processes.</p>
+                    <h2 class="text-3xl md:text-4xl font-bold text-primary-blue mb-6">About AugIx System</h2>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">AugIx System was incorporated in September 2025 by professionals with extensive experience in enterprise software implementation. We understand the practical challenges organizations face in managing compliance, risk and operational processes.</p>
                 </div>
                 
                 <div class="grid lg:grid-cols-2 gap-12 items-center">
@@ -381,51 +401,59 @@
             <div id="team-section" class="hidden">
                 <div class="text-center mb-12">
                     <h2 class="text-3xl md:text-4xl font-bold text-primary-blue mb-6">Our Leadership Team</h2>
-                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">Meet the visionary leader driving innovation at AugIx Sys LLP</p>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">Meet the visionary leader driving innovation at AugIx System</p>
                 </div>
                 
                 <div class="max-w-4xl mx-auto">
-                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
-                        <div class="bg-gradient-to-r from-primary-blue to-secondary-blue p-8 text-white">
-                            <div class="flex items-center space-x-6">
-                                <div class="bg-white/20 rounded-full p-4">
-                                    <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                                        <circle cx="12" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="1"/>
-                                        <path d="M12 14c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z" fill="none" stroke="currentColor" stroke-width="1"/>
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <div class="text-center mb-8">
+                            <!-- Founder Photo (Square Card Style) -->
+                            <div class="w-56 h-72 mx-auto mb-6 rounded-lg overflow-hidden shadow-lg border border-gray-200">
+                                <img src="founder.jpg" alt="Founder & CEO - Narendra Shukla" class="w-full h-full object-cover">
+                            </div>
+
+                            <h3 class="text-2xl font-bold text-primary-blue mb-2">NARENDRA SHUKLA</h3>
+                            <p class="text-lg font-semibold text-accent-orange mb-4">Founder & CEO</p>
+                            
+                            
+                            <!-- Contact Information -->
+                            <div class="flex justify-center space-x-6 mb-6">
+                                <a href="mailto:narendra.n.shukla@augixsys.com" class="flex items-center text-secondary-blue hover:text-blue-700 transition-colors">
+                                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
                                     </svg>
-                                </div>
-                                <div>
-                                    <div class="bg-white/10 backdrop-blur-sm rounded-lg px-6 py-3 border border-white/20">
-                                        <h3 class="text-2xl font-bold italic">NARENDRA SHUKLA</h3>
-                                        <p class="text-lg font-semibold text-accent-orange">Founder & CEO</p>
-                                    </div>
-                                </div>
+                                    Email
+                                </a>
+                                <a href="https://linkedin.com/in/narendranshukla" target="_blank" class="flex items-center text-secondary-blue hover:text-blue-700 transition-colors">
+                                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                    </svg>
+                                    LinkedIn
+                                </a>
                             </div>
                         </div>
                         
-                        <div class="p-8">
-                            <div class="prose prose-lg max-w-none">
-                                <p class="text-gray-700 leading-relaxed mb-6">
-                                    <strong class="text-primary-blue">Narendra N. Shukla</strong> is the Founder & CEO of AugIx Systems, a next-generation venture dedicated to reshaping <strong class="text-emerald-600">Governance, Risk and Compliance (GRC)</strong> through the integration of emerging technologies. With nearly <em class="text-purple-600">two decades of international experience</em> across SAP Labs, IBM, and high-growth startups, he brings together technical expertise, strategic foresight, and business leadership to drive meaningful digital transformation.
-                                </p>
-                                
-                                <p class="text-gray-700 leading-relaxed mb-6">
-                                    His journey began at <strong class="text-blue-600">SAP Labs</strong>, where he quickly established himself in product development. His innovative contributions earned him the prestigious title of <em class="text-amber-600">"Development Angel"</em> from the SAP AG Board, recognizing his role in building platforms that continue to power enterprises globally. This early recognition set the tone for a career defined by <span class="text-rose-600 font-semibold">innovation and impact</span>.
-                                </p>
-                                
-                                <p class="text-gray-700 leading-relaxed mb-6">
-                                    At <strong class="text-indigo-600">IBM</strong>, Narendra spent over a decade leading critical programs in <span class="text-teal-600 font-medium">enterprise architecture, consulting, and project management</span>. Partnering with global clients, he played a key role in guiding large-scale digital transformation initiatives, bringing together technology, process, and strategy to solve complex challenges. His experience here gave him a truly <em class="text-cyan-600">global perspective</em> on enterprise operations and digital governance.
-                                </p>
-                                
-                                <p class="text-gray-700 leading-relaxed mb-6">
-                                    Embracing entrepreneurship, Narendra emerged as an <em class="text-violet-600">innovation catalyst</em>. He pioneered <strong class="text-green-600">India's first blockchain-powered experiential ticketing system</strong> in collaboration with IRCTC, delivering groundbreaking projects such as <em class="text-orange-600">Mahakumbh NFT 2025</em>, <em class="text-pink-600">Aastha 2024</em>, and the <em class="text-red-600">Holi Festive NFT Series 2024</em>. Beyond this, his leadership extended to transformative programs with <span class="text-blue-700 font-medium">Indian Railways, ONDC, and NISG</span>, where he helped reimagine governance and digital ecosystems for the public and private sectors alike.
-                                </p>
-                                
-                                <p class="text-gray-700 leading-relaxed">
-                                    Today, with <strong class="text-primary-blue">AugIx Systems</strong>, Narendra is building a next-generation GRC platform designed to <span class="text-emerald-700 font-medium">predict risks, automate compliance, and enhance transparency</span> for enterprises and governments. Guided by his philosophy of <em class="text-sky-600">"Inclusive Smart Digital Governance,"</em> he envisions technology as a driver of <span class="text-lime-600 font-semibold">empowerment, accountability, transparency, and inclusive growth</span>—reshaping the way organizations and governments operate in the digital age.
-                                </p>
-                            </div>
+                        <div class="text-left">
+                            <p class="text-gray-700 leading-relaxed mb-4">
+                                Narendra N. Shukla is the Founder & CEO of AugIx Systems, a next-generation venture dedicated to reshaping Governance, Risk and Compliance (GRC) through the integration of emerging technologies. With nearly two decades of international experience across SAP Labs, IBM, and high-growth startups, he brings together technical expertise, strategic foresight, and business leadership to drive meaningful digital transformation.
+                            </p>
+                            
+                            <p class="text-gray-700 leading-relaxed mb-4">
+                                His journey began at SAP Labs, where he quickly established himself in product development. His innovative contributions earned him the prestigious title of "Development Angel" from the SAP AG Board, recognizing his role in building platforms that continue to power enterprises globally. This early recognition set the tone for a career defined by innovation and impact.
+                            </p>
+                            
+                            <p class="text-gray-700 leading-relaxed mb-4">
+                                At IBM, Narendra spent over a decade leading critical programs in enterprise architecture, consulting, and project management. Partnering with global clients, he played a key role in guiding large-scale digital transformation initiatives, bringing together technology, process, and strategy to solve complex challenges. His experience here gave him a truly global perspective on enterprise operations and digital governance.
+                            </p>
+                            
+                            <p class="text-gray-700 leading-relaxed mb-4">
+                                Embracing entrepreneurship, Narendra emerged as an innovation catalyst. He pioneered India's first blockchain-powered experiential ticketing system in collaboration with IRCTC, delivering groundbreaking projects such as Mahakumbh NFT 2025, Aastha 2024, and the Holi Festive NFT Series 2024. Beyond this, his leadership extended to transformative programs with Indian Railways, ONDC, and NISG, where he helped reimagine governance and digital ecosystems for the public and private sectors alike.
+                            </p>
+                            
+                            <p class="text-gray-700 leading-relaxed">
+                                Today, with AugIx Systems, Narendra is building a next-generation GRC platform designed to predict risks, automate compliance, and enhance transparency for enterprises and governments. Guided by his philosophy of "Inclusive Smart Digital Governance," he envisions technology as a driver of empowerment, accountability, transparency, and inclusive growth—reshaping the way organizations and governments operate in the digital age.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -434,7 +462,7 @@
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-16 bg-white">
+    <section id="services" class="py-16 bg-white page-section">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold text-primary-blue mb-6">Our Services</h2>
@@ -506,10 +534,10 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-16 bg-gray-50">
+    <section id="contact" class="py-16 bg-gray-50 page-section">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-primary-blue mb-6">Contact AugIx Sys LLP</h2>
+                <h2 class="text-3xl md:text-4xl font-bold text-primary-blue mb-6">Contact AugIx System</h2>
                 <p class="text-lg text-gray-600">Get in touch with us to discuss your enterprise automation needs</p>
             </div>
             
@@ -537,7 +565,10 @@
                             </svg>
                             <div>
                                 <h4 class="font-semibold text-primary-blue">Phone</h4>
-                                <a href="tel:9667609655" class="text-secondary-blue hover:underline">9667609655</a>
+                                <div class="flex items-center">
+                                    <span class="text-lg mr-2">🇮🇳</span>
+                                    <a href="tel:+919667609655" class="text-secondary-blue hover:underline">+91 9667609655</a>
+                                </div>
                             </div>
                         </div>
                         
@@ -550,14 +581,6 @@
                                 <h4 class="font-semibold text-primary-blue">Email</h4>
                                 <a href="mailto:info@augixsys.com?subject=Inquiry%20about%20AugIx%20Sys%20Services&body=Hello%20AugIx%20Sys%20Team,%0A%0AI%20am%20interested%20in%20learning%20more%20about%20your%20enterprise%20solutions.%20Please%20contact%20me%20to%20discuss%20my%20requirements.%0A%0AThank%20you." class="text-secondary-blue hover:underline">info@augixsys.com</a>
                             </div>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-8 p-6 bg-white rounded-lg shadow-md">
-                        <h4 class="font-semibold text-primary-blue mb-4">Registration Details</h4>
-                        <div class="space-y-2 text-sm text-gray-600">
-                            <p><span class="font-medium">LLP Identification Number:</span> ACR-1200</p>
-                            <p><span class="font-medium">PAN:</span> ACLFA2847A</p>
                         </div>
                     </div>
                 </div>
@@ -612,7 +635,7 @@
     </section>
 
     <!-- Blog Section -->
-    <section id="blog" class="py-16 bg-white">
+    <section id="blog" class="py-16 bg-white page-section">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold text-primary-blue mb-6">Blog & Insights</h2>
@@ -697,15 +720,22 @@
                 <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[#00B3FF]/10 to-transparent rounded-full blur-2xl"></div>
                 <div class="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-[#0099cc]/10 to-transparent rounded-full blur-xl"></div>
             </div>
-            
-            <style>
-                @keyframes float {
-                    0%, 100% { transform: translateY(0px); }
-                    50% { transform: translateY(-10px); }
-                }
-            </style>
         </div>
     </section>
+
+    <!-- WhatsApp Business Float Button -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <a href="https://wa.me/919667609655?text=Hello%20AugIx%20Sys%20Team!%20I%20am%20interested%20in%20your%20enterprise%20solutions.%20Please%20provide%20me%20with%20more%20information." target="_blank" class="whatsapp-float bg-green-500 hover:bg-green-600 text-white w-14 h-14 rounded-full shadow-lg transition-all duration-300 flex items-center justify-center relative group">
+            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+            </svg>
+            <!-- Tooltip that appears on hover -->
+            <div class="absolute right-16 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                WhatsApp Business
+                <div class="absolute top-1/2 -right-1 transform -translate-y-1/2 w-2 h-2 bg-gray-800 rotate-45"></div>
+            </div>
+        </a>
+    </div>
 
     <!-- Career Application Modal -->
     <div id="career-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
@@ -782,7 +812,7 @@
                     </div>
                     
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Why do you want to join AugIx Sys? *</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Why do you want to join AugIx System? *</label>
                         <textarea id="motivation" rows="4" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-secondary-blue focus:border-transparent" placeholder="Tell us what interests you about our company and this role"></textarea>
                     </div>
                     
@@ -831,7 +861,7 @@
         <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             <div class="p-6">
                 <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-2xl font-bold text-primary-blue">Send Email to AugIx Sys LLP</h3>
+                    <h3 class="text-2xl font-bold text-primary-blue">Send Email to AugIx System</h3>
                     <button id="close-modal" class="text-gray-500 hover:text-gray-700">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -909,7 +939,7 @@ Best regards"></textarea>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-3 gap-8">
                 <div>
-                    <h3 class="text-2xl font-bold mb-4">AugIx Sys LLP</h3>
+                    <h3 class="text-2xl font-bold mb-4">AugIx System</h3>
                     <p class="text-gray-300 mb-4">Innovating Enterprise Solutions with Modern Technology</p>
                     <p class="text-sm text-gray-400">Automate intelligently. Scale effortlessly.</p>
                 </div>
@@ -917,10 +947,10 @@ Best regards"></textarea>
                 <div>
                     <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
                     <ul class="space-y-2">
-                        <li><a href="#home" class="text-gray-300 hover:text-white transition-colors">Home</a></li>
-                        <li><a href="#about" class="text-gray-300 hover:text-white transition-colors">About</a></li>
-                        <li><a href="#services" class="text-gray-300 hover:text-white transition-colors">Services</a></li>
-                        <li><a href="#contact" class="text-gray-300 hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="#" onclick="showSection('home')" class="text-gray-300 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#" onclick="showSection('about')" class="text-gray-300 hover:text-white transition-colors">About</a></li>
+                        <li><a href="#" onclick="showSection('services')" class="text-gray-300 hover:text-white transition-colors">Services</a></li>
+                        <li><a href="#" onclick="showSection('contact')" class="text-gray-300 hover:text-white transition-colors">Contact</a></li>
                     </ul>
                 </div>
                 
@@ -928,7 +958,7 @@ Best regards"></textarea>
                     <h4 class="text-lg font-semibold mb-4">Contact Info</h4>
                     <div class="space-y-2 text-gray-300">
                         <p>📍 Noida, Uttar Pradesh</p>
-                        <p>📞 <a href="tel:9667609655" class="hover:text-white">9667609655</a></p>
+                        <p>📞 <a href="tel:+919667609655" class="hover:text-white">+91 9667609655</a></p>
                         <p>✉️ <a href="mailto:info@augixsys.com?subject=Inquiry%20about%20AugIx%20Sys%20Services&body=Hello%20AugIx%20Sys%20Team,%0A%0AI%20am%20interested%20in%20learning%20more%20about%20your%20enterprise%20solutions.%20Please%20contact%20me%20to%20discuss%20my%20requirements.%0A%0AThank%20you." class="hover:text-white">info@augixsys.com</a></p>
                     </div>
                 </div>
@@ -941,6 +971,41 @@ Best regards"></textarea>
     </footer>
 
     <script>
+        // Section navigation system
+        function showSection(sectionName) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.page-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            const targetSection = document.getElementById(sectionName);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+            
+            // Update navigation active state
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            const activeNavLink = document.querySelector(`[data-section="${sectionName}"]`);
+            if (activeNavLink) {
+                activeNavLink.classList.add('active');
+            }
+            
+            // Close mobile menu if open
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenu) {
+                mobileMenu.classList.add('hidden');
+            }
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
         // Dropdown menu functionality
         document.addEventListener('DOMContentLoaded', function() {
             const aboutNav = document.getElementById('about-nav');
@@ -948,14 +1013,16 @@ Best regards"></textarea>
             const dropdownItems = document.querySelectorAll('.dropdown-item');
             
             // Show dropdown on hover
-            aboutNav.parentElement.addEventListener('mouseenter', function() {
-                aboutDropdown.classList.add('show');
-            });
-            
-            // Hide dropdown when leaving the nav item
-            aboutNav.parentElement.addEventListener('mouseleave', function() {
-                aboutDropdown.classList.remove('show');
-            });
+            if (aboutNav && aboutDropdown) {
+                aboutNav.parentElement.addEventListener('mouseenter', function() {
+                    aboutDropdown.classList.add('show');
+                });
+                
+                // Hide dropdown when leaving the nav item
+                aboutNav.parentElement.addEventListener('mouseleave', function() {
+                    aboutDropdown.classList.remove('show');
+                });
+            }
             
             // Handle dropdown item clicks
             dropdownItems.forEach(item => {
@@ -967,15 +1034,15 @@ Best regards"></textarea>
                     
                     const section = this.getAttribute('data-section');
                     if (section === 'company') {
-                        // Show company section, hide team section
+                        // Show about section with company content
+                        showSection('about');
                         document.getElementById('company-section').classList.remove('hidden');
                         document.getElementById('team-section').classList.add('hidden');
-                        document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
                     } else if (section === 'team') {
-                        // Show team section, hide company section
+                        // Show about section with team content
+                        showSection('about');
                         document.getElementById('company-section').classList.add('hidden');
                         document.getElementById('team-section').classList.remove('hidden');
-                        document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
                     } else if (section === 'career') {
                         // Open career modal
                         document.getElementById('career-modal').classList.remove('hidden');
@@ -988,29 +1055,37 @@ Best regards"></textarea>
             });
         });
 
+        // Read More/Less functionality for founder bio
+        document.addEventListener('DOMContentLoaded', function() {
+            const readMoreBtn = document.getElementById('read-more-btn');
+            const readLessBtn = document.getElementById('read-less-btn');
+            const founderPreview = document.getElementById('founder-preview');
+            const founderFull = document.getElementById('founder-full');
+            
+            if (readMoreBtn) {
+                readMoreBtn.addEventListener('click', function() {
+                    founderPreview.classList.add('hidden');
+                    founderFull.classList.remove('hidden');
+                });
+            }
+            
+            if (readLessBtn) {
+                readLessBtn.addEventListener('click', function() {
+                    founderFull.classList.add('hidden');
+                    founderPreview.classList.remove('hidden');
+                });
+            }
+        });
+
         // Mobile menu toggle
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                    // Close mobile menu if open
-                    mobileMenu.classList.add('hidden');
-                }
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
             });
-        });
+        }
 
         // Career Modal functionality
         document.addEventListener('DOMContentLoaded', function() {
@@ -1025,11 +1100,13 @@ Best regards"></textarea>
             
             // Close career modal functions
             function closeCareerModalFunc() {
-                careerModal.classList.add('hidden');
-                document.body.style.overflow = 'auto';
-                careerForm.reset();
-                fileInfo.classList.add('hidden');
-                uploadArea.classList.remove('hidden');
+                if (careerModal) {
+                    careerModal.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                    if (careerForm) careerForm.reset();
+                    if (fileInfo) fileInfo.classList.add('hidden');
+                    if (uploadArea) uploadArea.classList.remove('hidden');
+                }
             }
             
             if (closeCareerModal) {
@@ -1041,39 +1118,43 @@ Best regards"></textarea>
             }
             
             // Close modal when clicking outside
-            careerModal.addEventListener('click', function(e) {
-                if (e.target === careerModal) {
-                    closeCareerModalFunc();
-                }
-            });
+            if (careerModal) {
+                careerModal.addEventListener('click', function(e) {
+                    if (e.target === careerModal) {
+                        closeCareerModalFunc();
+                    }
+                });
+            }
             
             // File upload handling
-            uploadArea.addEventListener('click', function() {
-                resumeUpload.click();
-            });
-            
-            resumeUpload.addEventListener('change', function(e) {
-                const file = e.target.files[0];
-                if (file) {
-                    // Validate file type and size
-                    if (file.type !== 'application/pdf') {
-                        alert('Please upload a PDF file only.');
-                        this.value = '';
-                        return;
+            if (uploadArea && resumeUpload) {
+                uploadArea.addEventListener('click', function() {
+                    resumeUpload.click();
+                });
+                
+                resumeUpload.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        // Validate file type and size
+                        if (file.type !== 'application/pdf') {
+                            alert('Please upload a PDF file only.');
+                            this.value = '';
+                            return;
+                        }
+                        
+                        if (file.size > 4 * 1024 * 1024) { // 4MB
+                            alert('File size must be less than 4MB.');
+                            this.value = '';
+                            return;
+                        }
+                        
+                        // Show file info
+                        if (fileName) fileName.textContent = file.name;
+                        if (uploadArea) uploadArea.classList.add('hidden');
+                        if (fileInfo) fileInfo.classList.remove('hidden');
                     }
-                    
-                    if (file.size > 4 * 1024 * 1024) { // 4MB
-                        alert('File size must be less than 4MB.');
-                        this.value = '';
-                        return;
-                    }
-                    
-                    // Show file info
-                    fileName.textContent = file.name;
-                    uploadArea.classList.add('hidden');
-                    fileInfo.classList.remove('hidden');
-                }
-            });
+                });
+            }
             
             // Handle career form submission
             if (careerForm) {
@@ -1088,11 +1169,10 @@ Best regards"></textarea>
                     submitBtn.disabled = true;
                     
                     // Get form data
-                    const formData = new FormData(this);
-                    const applicantName = formData.get('applicant-name') || document.getElementById('applicant-name').value;
-                    const applicantEmail = formData.get('applicant-email') || document.getElementById('applicant-email').value;
-                    const applicantPhone = formData.get('applicant-phone') || document.getElementById('applicant-phone').value;
-                    const applicantLocation = formData.get('applicant-location') || document.getElementById('applicant-location').value;
+                    const applicantName = document.getElementById('applicant-name').value;
+                    const applicantEmail = document.getElementById('applicant-email').value;
+                    const applicantPhone = document.getElementById('applicant-phone').value;
+                    const applicantLocation = document.getElementById('applicant-location').value;
                     const position = document.getElementById('position').value;
                     const experience = document.getElementById('experience').value;
                     const salary = document.getElementById('salary').value;
@@ -1151,15 +1231,19 @@ Best regards"></textarea>
             if (getStartedBtn) {
                 getStartedBtn.addEventListener('click', function(e) {
                     e.preventDefault();
-                    emailModal.classList.remove('hidden');
-                    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+                    if (emailModal) {
+                        emailModal.classList.remove('hidden');
+                        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+                    }
                 });
             }
             
             // Close modal functions
             function closeEmailModal() {
-                emailModal.classList.add('hidden');
-                document.body.style.overflow = 'auto'; // Restore scrolling
+                if (emailModal) {
+                    emailModal.classList.add('hidden');
+                    document.body.style.overflow = 'auto'; // Restore scrolling
+                }
             }
             
             if (closeModal) {
@@ -1171,11 +1255,13 @@ Best regards"></textarea>
             }
             
             // Close modal when clicking outside
-            emailModal.addEventListener('click', function(e) {
-                if (e.target === emailModal) {
-                    closeEmailModal();
-                }
-            });
+            if (emailModal) {
+                emailModal.addEventListener('click', function(e) {
+                    if (e.target === emailModal) {
+                        closeEmailModal();
+                    }
+                });
+            }
             
             // Handle email form submission
             if (emailForm) {
@@ -1220,7 +1306,7 @@ Best regards"></textarea>
                         }, 1000);
                         
                     } catch (error) {
-                        alert('Please contact us directly at: info@augixsys.com or call 9667609655');
+                        alert('Please contact us directly at: info@augixsys.com or call +91 9667609655');
                         submitBtn.innerHTML = originalText;
                         submitBtn.disabled = false;
                     }
@@ -1274,34 +1360,13 @@ Best regards"></textarea>
                         }, 1000);
                         
                     } catch (error) {
-                        alert('Please contact us directly at: info@augixsys.com or call 9667609655');
+                        alert('Please contact us directly at: info@augixsys.com or call +91 9667609655');
                         submitBtn.innerHTML = originalText;
                         submitBtn.disabled = false;
                     }
                 });
             }
         });
-
-        // Add active navigation highlighting
-        window.addEventListener('scroll', () => {
-            const sections = document.querySelectorAll('section[id]');
-            const navLinks = document.querySelectorAll('nav a[href^="#"]');
-            
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - 100;
-                if (scrollY >= sectionTop) {
-                    current = section.getAttribute('id');
-                }
-            });
-            
-            navLinks.forEach(link => {
-                link.classList.remove('text-secondary-blue');
-                if (link.getAttribute('href') === '#' + current) {
-                    link.classList.add('text-secondary-blue');
-                }
-            });
-        });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97e855d2b3518993',t:'MTc1Nzc3Mzc1MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97f7a455301d45af',t:'MTc1NzkzNDI1Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>

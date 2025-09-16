@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AugIx System - Enterprise Solutions & Business Automation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-blue': '#003366',
+                        'secondary-blue': '#0066CC',
+                        'accent-orange': '#FF6600',
+                        'text-dark': '#333333'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .smooth-scroll {
+            scroll-behavior: smooth;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #001122 0%, #003366 50%, #0066CC 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .gradient-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(0, 179, 255, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(0, 179, 255, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(0, 179, 255, 0.15) 0%, transparent 50%);
+            opacity: 0.6;
+        }
+        .gradient-bg::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(45deg, transparent 48%, rgba(0, 179, 255, 0.1) 49%, rgba(0, 179, 255, 0.1) 51%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, rgba(0, 179, 255, 0.05) 49%, rgba(0, 179, 255, 0.05) 51%, transparent 52%);
+            background-size: 60px 60px, 40px 40px;
+            animation: networkFlow 20s linear infinite;
+        }
+        @keyframes networkFlow {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(60px, 60px); }
+        }
+        .network-nodes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+        }
+        .network-node {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #00B3FF;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 179, 255, 0.8);
+            animation: pulse 2s infinite alternate;
+        }
+        .network-node:nth-child(1) { top: 20%; left: 15%; animation-delay: 0s; }
+        .network-node:nth-child(2) { top: 40%; left: 80%; animation-delay: 0.5s; }
+        .network-node:nth-child(3) { top: 70%; left: 25%; animation-delay: 1s; }
+        .network-node:nth-child(4) { top: 30%; left: 60%; animation-delay: 1.5s; }
+        .network-node:nth-child(5) { top: 80%; left: 70%; animation-delay: 2s; }
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 260px;
+            background: linear-gradient(to bottom, #03122b, #08213a);
+            border-radius: 6px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            margin-top: 8px;
+        }
+        .dropdown-menu.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .dropdown-item {
+            padding: 16px 20px;
+            color: #FFFFFF;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 1.4;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            position: relative;
+        }
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+        .dropdown-item:hover {
+            background: #0b3553;
+            font-weight: 600;
+        }
+        .dropdown-item.active {
+            background: #0b3553;
+            font-weight: 600;
+        }
+        .dropdown-item.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #00B3FF;
+        }
+        .nav-item {
+            position: relative;
+        }
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 51, 102, 0.15);
+        }
+        .ai-symbol {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        .whatsapp-float {
+            animation: whatsappPulse 2s infinite;
+            box-shadow: 0 4px 20px rgba(34, 197, 94, 0.4);
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(34, 197, 94, 0.6);
+        }
+        @keyframes whatsappPulse {
+            0%, 100% { box-shadow: 0 4px 20px rgba(34, 197, 94, 0.4); }
+            50% { box-shadow: 0 4px 20px rgba(34, 197, 94, 0.7), 0 0 0 10px rgba(34, 197, 94, 0.1); }
+        }
+        .page-section {
+            display: none;
+        }
+        .page-section.active {
+            display: block;
+        }
+        .nav-link.active {
+            color: #0066CC !important;
+            font-weight: 600;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+    </style>
+</head>
+<body class="smooth-scroll bg-white text-text-dark">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <div class="flex items-center">
+                        <!-- Company Logo -->
+                        <div class="mr-4">
+                            <svg class="h-12 w-12" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Outer circle with gradient -->
+                                <circle cx="30" cy="30" r="28" fill="url(#logoGradient)" stroke="#003366" stroke-width="2"/>
+                                
+                                <!-- Inner geometric pattern representing automation/systems -->
+                                <g transform="translate(15, 15)">
+                                    <!-- Central hub -->
+                                    <circle cx="15" cy="15" r="4" fill="#FFFFFF"/>
+                                    
+                                    <!-- Connection nodes -->
+                                    <circle cx="6" cy="6" r="2.5" fill="#FF6600"/>
+                                    <circle cx="24" cy="6" r="2.5" fill="#FF6600"/>
+                                    <circle cx="6" cy="24" r="2.5" fill="#FF6600"/>
+                                    <circle cx="24" cy="24" r="2.5" fill="#FF6600"/>
+                                    
+                                    <!-- Connection lines -->
+                                    <line x1="8.5" y1="8.5" x2="12.5" y2="12.5" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+                                    <line x1="21.5" y1="8.5" x2="17.5" y2="12.5" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+                                    <line x1="8.5" y1="21.5" x2="12.5" y2="17.5" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+                                    <line x1="21.5" y1="21.5" x2="17.5" y2="17.5" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+                                    
+                                    <!-- Data flow indicators -->
+                                    <path d="M15 8 L15 12" stroke="#0066CC" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M22 15 L18 15" stroke="#0066CC" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M15 22 L15 18" stroke="#0066CC" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M8 15 L12 15" stroke="#0066CC" stroke-width="2" stroke-linecap="round"/>
+                                </g>
+                                
+                                <!-- Gradient definition -->
+                                <defs>
+                                    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#003366;stop-opacity:1" />
+                                        <stop offset="50%" style="stop-color:#0066CC;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#003366;stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        
+                        <!-- Company Name and Tagline -->
+                        <div class="text-left">
+                            <h1 class="text-2xl font-bold text-primary-blue leading-tight">AugIx System</h1>
+                            <p class="text-xs text-secondary-blue font-medium tracking-wide italic leading-relaxed">Trusted Processes, Intelligent Results</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#" onclick="showSection('home')" class="nav-link active text-text-dark hover:text-secondary-blue px-3 py-2 text-sm font-medium transition-colors" data-section="home">Home</a>
+                        <div class="nav-item">
+                            <a href="#" onclick="showSection('about')" class="nav-link text-text-dark hover:text-secondary-blue px-3 py-2 text-sm font-medium transition-colors" id="about-nav" data-section="about">About</a>
+                            <div class="dropdown-menu" id="about-dropdown">
+                                <div class="dropdown-item active" data-section="company">Our Company</div>
+                                <div class="dropdown-item" data-section="team">Core Team</div>
+                                <div class="dropdown-item" data-section="career">Career With Us</div>
+                            </div>
+                        </div>
+                        <a href="#" onclick="showSection('services')" class="nav-link text-text-dark hover:text-secondary-blue px-3 py-2 text-sm font-medium transition-colors" data-section="services">Services</a>
+                        <a href="#" onclick="showSection('contact')" class="nav-link text-text-dark hover:text-secondary-blue px-3 py-2 text-sm font-medium transition-colors" data-section="contact">Contact</a>
+                        <a href="#" onclick="showSection('blog')" class="nav-link text-text-dark hover:text-secondary-blue px-3 py-2 text-sm font-medium transition-colors" data-section="blog">Blog</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-text-dark hover:text-secondary-blue">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#" onclick="showSection('home')" class="block px-3 py-2 text-text-dark hover:text-secondary-blue">Home</a>
+                <a href="#" onclick="showSection('about')" class="block px-3 py-2 text-text-dark hover:text-secondary-blue">About</a>
+                <a href="#" onclick="showSection('services')" class="block px-3 py-2 text-text-dark hover:text-secondary-blue">Services</a>
+                <a href="#" onclick="showSection('contact')" class="block px-3 py-2 text-text-dark hover:text-secondary-blue">Contact</a>
+                <a href="#" onclick="showSection('blog')" class="block px-3 py-2 text-text-dark hover:text-secondary-blue">Blog</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="pt-16 page-section active">
+        <!-- Hero Section -->
+        <div class="gradient-bg text-white py-20">
+            <div class="network-nodes">
+                <div class="network-node"></div>
+                <div class="network-node"></div>
+                <div class="network-node"></div>
+                <div class="network-node"></div>
+                <div class="network-node"></div>
+            </div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">Innovating Enterprise Solutions with Modern Technology</h1>
+                <p class="text-xl md:text-2xl mb-8 max-w-4xl mx-auto">Empowering businesses to achieve efficiency, consistency and strategic oversight through intelligent assisted & adaptive automation.</p>
+                <p class="text-lg md:text-xl mb-10 font-semibold">Automate intelligently. Scale effortlessly.</p>
+                <div class="space-x-4">
+                    <a href="#" onclick="showSection('contact')" class="bg-accent-orange hover:bg-orange-700 text-white px-8 py-3 rounded-lg text-lg font-semibold transition-colors inline-block">Get Started</a>
+                    <a href="#" onclick="showSection('services')" class="border-2 border-white text-white hover:bg-white hover:text-primary-blue px-8 py-3 rounded-lg text-lg font-semibold transition-colors inline-block">Learn More</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Services Preview -->
+        <div class="py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-primary-blue">Our Core Services</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="bg-gradient-to-b from-[#03122b] to-[#08213a] p-6 rounded-lg shadow-md hover-lift border border-white/8">
+                        <div class="text-[#00B3FF] mb-4">
+                            <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-white text-[1.15em]">Business Process Automation</h3>
+                        <p class="text-[#dfeeff] leading-relaxed">Streamline your workflows and eliminate manual tasks with intelligent automation solutions.</p>
+                    </div>
+                    <div class="bg-gradient-to-b from-[#03122b] to-[#08213a] p-6 rounded-lg shadow-md hover-lift border border-white/8">
+                        <div class="text-[#00B3FF] mb-4">
+                            <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-white text-[1.15em]">Compliance & Risk Management</h3>
+                        <p class="text-[#dfeeff] leading-relaxed">Stay compliant and reduce risks with comprehensive monitoring and management systems.</p>
+                    </div>
+                    <div class="bg-gradient-to-b from-[#03122b] to-[#08213a] p-6 rounded-lg shadow-md hover-lift border border-white/8">
+                        <div class="text-[#00B3FF] mb-4">
+                            <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm0 2h12v8H4V6z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-white text-[1.15em]">Document Management</h3>
+                        <p class="text-[#dfeeff] leading-relaxed">Organize, secure, and manage your documents with advanced digital solutions.</p>
+                    </div>
+                    <div class="bg-gradient-to-b from-[#03122b] to-[#08213a] p-6 rounded-lg shadow-md hover-lift border border-white/8">
+                        <div class="text-[#00B3FF] mb-4">
+                            <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-white text-[1.15em]">Operational Reporting</h3>
+                        <p class="text-[#dfeeff] leading-relaxed">Get real-time insights and analytics to make informed business decisions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Why Choose Us -->
+        <div class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-primary-blue">Why Choose AugIx System</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="text-center">
+                        <div class="bg-secondary-blue text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2 text-primary-blue">Functionality First</h3>
+                        <p class="text-gray-600">Solutions that work reliably and deliver consistent results</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-secondary-blue text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 000 1.788l4 2A1 1 0 0017 13.382V15l-4-2zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788L9.553 8.658a1 1 0 00.894 0l4.764-2.382zM5.553 9.658L6 9.882v1.618a1 1 0 001.447.894l4-2A1 1 0 0012 9.618V8l-4.553-2.276a1 1 0 00-.894 0L2 7.618v1.618a1 1 0 001.447.894l2.106-1.472z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2 text-primary-blue">Integration Ready</h3>
+                        <p class="text-gray-600">Seamlessly works with your existing systems and infrastructure</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-secondary-blue text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2 text-primary-blue">User Focused</h3>
+                        <p class="text-gray-600">Intuitive interfaces designed for ease of use and adoption</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-secondary-blue text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2 text-primary-blue">Scalable Design</h3>
+                        <p class="text-gray-600">Solutions that grow and adapt with your business needs</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-gray-50 page-section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div id="company-section">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-primary-blue mb-6">About AugIx System</h2>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">AugIx System was incorporated in September 2025 by professionals with extensive experience in enterprise software implementation. We understand the practical challenges organizations face in managing compliance, risk and operational processes.</p>
+                </div>
+                
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h3 class="text-2xl font-bold text-primary-blue mb-6">Our Mission</h3>
+                        <p class="text-gray-600 mb-8">We develop software products for business automation and process management, helping organizations reduce manual efforts while enhancing accuracy and governance control.</p>
+                        
+                        <h3 class="text-2xl font-bold text-primary-blue mb-6">Our Expertise</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-secondary-blue mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                                </svg>
+                                Business process automation tools
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-secondary-blue mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                                </svg>
+                                Compliance and risk management systems
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-secondary-blue mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                                </svg>
+                                Document management platforms
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-secondary-blue mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                                </svg>
+                                Operational reporting solutions
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-white p-8 rounded-lg shadow-lg">
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <h4 class="font-semibold text-primary-blue mb-2">Company Highlights</h4>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Incorporated: September 2025</li>
+                                <li>• Focus: Enterprise Software Solutions</li>
+                                <li>• Specialization: Business Automation</li>
+                                <li>• Approach: Practical & Results-Driven</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Core Team Section -->
+            <div id="team-section" class="hidden">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-primary-blue mb-6">Our Leadership Team</h2>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">Meet the visionary leader driving innovation at AugIx System</p>
+                </div>
+                
+                <div class="max-w-4xl mx-auto">
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <div class="text-center mb-8">
+                            <!-- Founder Photo (Square Card Style) -->
+                            <div class="w-56 h-72 mx-auto mb-6 rounded-lg overflow-hidden shadow-lg border border-gray-200">
+                                <img src="founder.jpg" alt="Founder & CEO - Narendra Shukla" class="w-full h-full object-cover">
+                            </div>
+
+                            <h3 class="text-2xl font-bold text-primary-blue mb-2">NARENDRA SHUKLA</h3>
+                            <p class="text-lg font-semibold text-accent-orange mb-4">Founder & CEO</p>
+                                <!-- Contact Information -->
+                                <div class="space-y-3">
+                                    <a href="mailto:narendra.n.shukla@augixsys.com" target="_blank" class="flex items-center justify-center lg:justify-start text-secondary-blue hover:text-blue-700 transition-colors">
+                                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+                                        </svg>
+                                        Email
+                                    </a>
+                                    <a href="https://linkedin.com/in/narendranshukla" target="_blank" class="flex items-center justify-center lg:justify-start text-secondary-blue hover:text-blue-700 transition-colors">
+                                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                        </svg>
+                                        LinkedIn
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <!-- Right Column - Biography -->
+                            <div class="lg:col-span-2 text-left">
+                                <div id="bio-preview">
+                                    <p class="text-gray-700 leading-relaxed mb-4">
+                                        Narendra N. Shukla is the Founder & CEO of AugIx Systems, a next-generation venture dedicated to reshaping Governance, Risk and Compliance (GRC) through the integration of emerging technologies. With nearly two decades of international experience across SAP Labs, IBM, and high-growth startups, he brings together technical expertise, strategic foresight, and business leadership to drive meaningful digital transformation.
+                                    </p>
+                                    
+                                    <p class="text-gray-700 leading-relaxed mb-4">
+                                        His journey began at SAP Labs, where he quickly established himself in product development. His innovative contributions earned him the prestigious title of "Development Angel" from the SAP AG Board, recognizing his role in building platforms that continue to power enterprises globally...
+                                    </p>
+                                    
+                                    <button onclick="toggleBio()" class="bg-secondary-blue hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors inline-flex items-center">
+                                        <span id="read-more-text">Read More</span>
+                                        <svg id="read-more-icon" class="w-4 h-4 ml-2 transform transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                                
+                                <div id="bio-full" class="hidden">
+                                    <p class="text-gray-700 leading-relaxed mb-4">
+                                        Narendra N. Shukla is the Founder & CEO of AugIx Systems, a next-generation venture dedicated to reshaping Governance, Risk and Compliance (GRC) through the integration of emerging technologies. With nearly two decades of international experience across SAP Labs, IBM, and high-growth startups, he brings together technical expertise, strategic foresight, and business leadership to drive meaningful digital transformation.
+                                    </p>
+                                    
+                                    <p class="text-gray-700 leading-relaxed mb-4">
+                                        His journey began at SAP Labs, where he quickly established himself in product development. His innovative contributions earned him the prestigious title of "Development Angel" from the SAP AG Board, recognizing his role in building platforms that continue to power enterprises globally. This early recognition set the tone for a career defined by innovation and impact.
+                                    </p>
+                                    
+                                    <p class="text-gray-700 leading-relaxed mb-4">
+                                        At IBM, Narendra spent over a decade leading critical programs in enterprise architecture, consulting, and project management. Partnering with global clients, he played a key role in guiding large-scale digital transformation initiatives, bringing together technology, process, and strategy to solve complex challenges. His experience here gave him a truly global perspective on enterprise operations and digital governance.
+                                    </p>
+                                    
+                                    <p class="text-gray-700 leading-relaxed mb-4">
+                                        Embracing entrepreneurship, Narendra emerged as an innovation catalyst. He pioneered India's first blockchain-powered experiential ticketing system in collaboration with IRCTC, delivering groundbreaking projects such as Mahakumbh NFT 2025, Aastha 2024, and the Holi Festive NFT Series 2024. Beyond this, his leadership extended to transformative programs with Indian Railways, ONDC, and NISG, where he helped reimagine governance and digital ecosystems for the public and private sectors alike.
+                                    </p>
+                                    
+                                    <p class="text-gray-700 leading-relaxed mb-4">
+                                        Today, with AugIx Systems, Narendra is building a next-generation GRC platform designed to predict risks, automate compliance, and enhance transparency for enterprises and governments. Guided by his philosophy of "Inclusive Smart Digital Governance," he envisions technology as a driver of empowerment, accountability, transparency, and inclusive growth—reshaping the way organizations and governments operate in the digital age.
+                                    </p>
+                                    
+                                    <button onclick="toggleBio()" class="bg-secondary-blue hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors inline-flex items-center">
+                                        <span id="read-less-text">Read Less</span>
+                                        <svg id="read-less-icon" class="w-4 h-4 ml-2 transform transition-transform rotate-180" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16 bg-white page-section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-primary-blue mb-6">Our Services</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Comprehensive enterprise solutions designed to transform your business operations</p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-8">
+                <div class="bg-gray-50 p-8 rounded-lg hover-lift">
+                    <div class="text-secondary-blue mb-4">
+                        <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-primary-blue mb-4">Business Process Automation</h3>
+                    <p class="text-gray-600 mb-4">Streamline your workflows and eliminate manual tasks with intelligent automation solutions.</p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>• Workflow optimization and digitization</li>
+                        <li>• Automated task scheduling and execution</li>
+                        <li>• Integration with existing business systems</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gray-50 p-8 rounded-lg hover-lift">
+                    <div class="text-secondary-blue mb-4">
+                        <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-primary-blue mb-4">Compliance & Risk Management</h3>
+                    <p class="text-gray-600 mb-4">Stay compliant and reduce risks with comprehensive monitoring and management systems.</p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>• Regulatory compliance monitoring</li>
+                        <li>• Risk assessment and mitigation tools</li>
+                        <li>• Audit trail and reporting capabilities</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gray-50 p-8 rounded-lg hover-lift">
+                    <div class="text-secondary-blue mb-4">
+                        <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm0 2h12v8H4V6z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-primary-blue mb-4">Document Management</h3>
+                    <p class="text-gray-600 mb-4">Organize, secure, and manage your documents with advanced digital solutions.</p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>• Centralized document storage and retrieval</li>
+                        <li>• Version control and access management</li>
+                        <li>• Secure sharing and collaboration tools</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gray-50 p-8 rounded-lg hover-lift">
+                    <div class="text-secondary-blue mb-4">
+                        <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/>
+                            </svg>
+                        </div>
+                    <h3 class="text-2xl font-bold text-primary-blue mb-4">Operational Reporting</h3>
+                    <p class="text-gray-600 mb-4">Get real-time insights and analytics to make informed business decisions.</p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>• Real-time dashboard and analytics</li>
+                        <li>• Custom report generation</li>
+                        <li>• Performance metrics and KPI tracking</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-gray-50 page-section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-primary-blue mb-6">Contact AugIx System</h2>
+                <p class="text-lg text-gray-600">Get in touch with us to discuss your enterprise automation needs</p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-2xl font-bold text-primary-blue mb-6">Contact Information</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <svg class="w-6 h-6 text-secondary-blue mt-1 mr-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"/>
+                            </svg>
+                            <div>
+                                <h4 class="font-semibold text-primary-blue">Address</h4>
+                                <p class="text-gray-600">Plot Number A4, Logix Technova Sector 132<br>
+                                Maharishi Nagar, Expressway Police Station<br>
+                                Noida, Gautam Buddha Nagar - 201304<br>
+                                Uttar Pradesh</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <svg class="w-6 h-6 text-secondary-blue mt-1 mr-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+                            </svg>
+                            <div>
+                                <h4 class="font-semibold text-primary-blue">Phone</h4>
+                                <div class="flex items-center">
+                                    <span class="text-lg mr-2">🇮🇳</span>
+                                    <a href="tel:+919667609655" class="text-secondary-blue hover:underline">+91 9667609655</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <svg class="w-6 h-6 text-secondary-blue mt-1 mr-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+                            </svg>
+                            <div>
+                                <h4 class="font-semibold text-primary-blue">Email</h4>
+                                <a href="mailto:info@augixsys.com" class="text-secondary-blue hover:underline">info@augixsys.com</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <h3 class="text-2xl font-bold text-primary-blue mb-6">Send us a Message</h3>
+                    <form id="contact-form" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Name *</label>
+                            <input type="text" id="name" name="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-blue focus:border-transparent transition-all duration-200 hover:border-secondary-blue hover:shadow-md">
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+                            <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-blue focus:border-transparent transition-all duration-200 hover:border-secondary-blue hover:shadow-md">
+                        </div>
+                        
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone</label>
+                            <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-blue focus:border-transparent transition-all duration-200 hover:border-secondary-blue hover:shadow-md">
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message *</label>
+                            <textarea id="message" name="message" rows="5" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-blue focus:border-transparent transition-all duration-200 hover:border-secondary-blue hover:shadow-md resize-none"></textarea>
+                        </div>
+                        
+                        <button type="submit" id="submit-btn" class="w-full bg-accent-orange hover:bg-orange-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl disabled:opacity-75 disabled:cursor-not-allowed disabled:transform-none">
+                            <span id="btn-text">Send Message</span>
+                            <span id="btn-loading" class="hidden flex items-center justify-center">
+                                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                                Sending...
+                            </span>
+                        </button>
+                    </form>
+                    
+                    <!-- Success Message -->
+                    <div id="contact-success" class="hidden mt-6 p-6 bg-gradient-to-r from-green-50 via-green-100 to-emerald-50 border border-green-200 rounded-xl shadow-lg">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center shadow-md">
+                                    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-bold text-green-800 mb-1">Message sent successfully. Thank you!</h4>
+                                <p class="text-green-700 text-sm leading-relaxed">We've received your message and will get back to you within 24 hours. Check your email for a confirmation.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="py-16 bg-white page-section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-primary-blue mb-6">Blog & Insights</h2>
+                <p class="text-lg text-gray-600 mb-8">Stay updated with the latest trends in enterprise automation and technology</p>
+            </div>
+            
+
+            
+            <div class="relative bg-gradient-to-br from-[#f8fafc] to-[#e2e8f0] p-12 rounded-2xl shadow-lg border border-white/50 overflow-hidden">
+                <!-- Animated background elements -->
+                <div class="absolute inset-0 opacity-5">
+                    <div class="absolute top-4 left-4 w-2 h-2 bg-[#00B3FF] rounded-full animate-pulse"></div>
+                    <div class="absolute top-8 right-8 w-1 h-1 bg-[#00B3FF] rounded-full animate-pulse" style="animation-delay: 0.5s;"></div>
+                    <div class="absolute bottom-6 left-12 w-1.5 h-1.5 bg-[#00B3FF] rounded-full animate-pulse" style="animation-delay: 1s;"></div>
+                    <div class="absolute bottom-12 right-6 w-1 h-1 bg-[#00B3FF] rounded-full animate-pulse" style="animation-delay: 1.5s;"></div>
+                </div>
+                
+                <!-- Floating icon with animation -->
+                <div class="relative mb-6">
+                    <div class="w-20 h-20 mx-auto bg-gradient-to-br from-[#00B3FF] to-[#0099cc] rounded-2xl flex items-center justify-center shadow-xl transform hover:scale-105 transition-all duration-300" style="animation: float 3s ease-in-out infinite;">
+                        <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"/>
+                            <path d="M6 12a2 2 0 002 2h4a2 2 0 002-2V8a2 2 0 00-2-2H8a2 2 0 00-2 2v4z" opacity="0.6"/>
+                        </svg>
+                    </div>
+                    <!-- Glow effect -->
+                    <div class="absolute inset-0 w-20 h-20 mx-auto bg-[#00B3FF] rounded-2xl opacity-20 blur-xl"></div>
+                </div>
+                
+                <div class="text-center relative z-10">
+                    <h3 class="text-2xl font-bold text-[#1e293b] mb-4">
+                        <span class="bg-gradient-to-r from-[#00B3FF] to-[#0099cc] bg-clip-text text-transparent">Coming Soon</span>
+                    </h3>
+                    <p class="text-[#64748b] leading-relaxed max-w-2xl mx-auto mb-6">
+                        We're crafting valuable content about <span class="font-semibold text-[#475569]">enterprise automation</span>, 
+                        <span class="font-semibold text-[#475569]">best practices</span>, and 
+                        <span class="font-semibold text-[#475569]">industry insights</span>. 
+                        Our expert team is preparing comprehensive articles and thought leadership pieces.
+                    </p>
+                    
+                    <!-- Progress indicator -->
+                    <div class="flex items-center justify-center space-x-2 mb-4">
+                        <div class="w-2 h-2 bg-[#00B3FF] rounded-full animate-bounce"></div>
+                        <div class="w-2 h-2 bg-[#00B3FF] rounded-full animate-bounce" style="animation-delay: 0.1s;"></div>
+                        <div class="w-2 h-2 bg-[#00B3FF] rounded-full animate-bounce" style="animation-delay: 0.2s;"></div>
+                    </div>
+                    
+                    <p class="text-sm text-[#94a3b8] font-medium">
+                        📝 Content in development • 🚀 Launching soon
+                    </p>
+                </div>
+                
+                <!-- Decorative elements -->
+                <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[#00B3FF]/10 to-transparent rounded-full blur-2xl"></div>
+                <div class="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-[#0099cc]/10 to-transparent rounded-full blur-xl"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Career Modal -->
+    <div id="career-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg shadow-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <!-- Modal Header -->
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-primary-blue">Career Opportunities</h2>
+                    <button onclick="closeCareerModal()" class="text-gray-400 hover:text-gray-600 text-2xl font-bold">
+                        ×
+                    </button>
+                </div>
+                
+                <!-- Career Information -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold text-primary-blue mb-3">Join Our Growing Team</h3>
+                    <p class="text-gray-600 mb-4">
+                        AugIx System is always looking for talented individuals who are passionate about enterprise automation and technology innovation. We offer exciting opportunities to work on cutting-edge projects that make a real impact.
+                    </p>
+                </div>
+                
+                <!-- Career Application Form -->
+                <form id="career-form" class="space-y-4">
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="career-name" class="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
+                            <input type="text" id="career-name" name="name" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-blue focus:border-transparent">
+                        </div>
+                        
+                        <div>
+                            <label for="career-email" class="block text-sm font-medium text-gray-700 mb-1">Email Address *</label>
+                            <input type="email" id="career-email" name="email" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-blue focus:border-transparent">
+                        </div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="career-phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
+                            <input type="tel" id="career-phone" name="phone" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-blue focus:border-transparent">
+                        </div>
+                        
+                        <div>
+                            <label for="location" class="block text-sm font-medium text-gray-700 mb-1">Current Location *</label>
+                            <input type="text" id="location" name="location" required placeholder="City, State/Country" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-blue focus:border-transparent">
+                        </div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="position" class="block text-sm font-medium text-gray-700 mb-1">Position Applied For *</label>
+                            <select id="position" name="position" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-blue focus:border-transparent">
+                                <option value="">Select Position</option>
+                                <option value="Software Development Engineer">Software Development Engineer</option>
+                                <option value="Business Process Analyst">Business Process Analyst</option>
+                                <option value="Product Manager">Product Manager</option>
+                                <option value="UI/UX Designer">UI/UX Designer</option>
+                                <option value="DevOps Engineer">DevOps Engineer</option>
+                                <option value="Quality Assurance Engineer">Quality Assurance Engineer</option>
+                                <option value="Sales Executive">Sales Executive</option>
+                                <option value="Marketing Specialist">Marketing Specialist</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="experience" class="block text-sm font-medium text-gray-700 mb-1">Experience Level *</label>
+                            <select id="experience" name="experience" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-blue focus:border-transparent">
+                                <option value="">Select Experience</option>
+                                <option value="Fresh Graduate">Fresh Graduate (0-1 years)</option>
+                                <option value="Junior Level">Junior Level (1-3 years)</option>
+                                <option value="Mid Level">Mid Level (3-5 years)</option>
+                                <option value="Senior Level">Senior Level (5-8 years)</option>
+                                <option value="Lead Level">Lead Level (8+ years)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="salary" class="block text-sm font-medium text-gray-700 mb-1">Expected Salary *</label>
+                        <input type="text" id="salary" name="salary" required placeholder="e.g., ₹5,00,000 - ₹8,00,000 per annum" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-blue focus:border-transparent">
+                    </div>
+                    
+                    <div>
+                        <label for="skills" class="block text-sm font-medium text-gray-700 mb-1">Key Skills *</label>
+                        <textarea id="skills" name="skills" rows="3" required placeholder="List your key technical and professional skills (e.g., Java, Python, Project Management, etc.)" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-blue focus:border-transparent resize-none"></textarea>
+                    </div>
+                    
+                    <div>
+                        <label for="resume" class="block text-sm font-medium text-gray-700 mb-1">Resume/CV (PDF only, max 4MB) *</label>
+                        <div class="relative">
+                            <input type="file" id="resume" name="resume" accept=".pdf" required class="hidden">
+                            <button type="button" onclick="document.getElementById('resume').click()" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-left text-gray-600 hover:bg-gray-50 focus:ring-2 focus:ring-secondary-blue focus:border-transparent">
+                                Choose PDF File (Max 4MB)
+                            </button>
+                            <div id="resume-file-name" class="text-sm text-green-600 mt-1"></div>
+                            <div id="file-error" class="text-sm text-red-600 mt-1 hidden"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="why-join" class="block text-sm font-medium text-gray-700 mb-1">Why do you want to join us? *</label>
+                        <textarea id="why-join" name="why-join" rows="4" required placeholder="Tell us what motivates you to join AugIx System and how you can contribute to our mission..." class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-blue focus:border-transparent resize-none"></textarea>
+                    </div>
+                    
+                    <div class="flex justify-end space-x-3 pt-4">
+                        <button type="button" onclick="closeCareerModal()" class="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                            Cancel
+                        </button>
+                        <button type="submit" id="career-submit-btn" class="px-6 py-2 bg-accent-orange hover:bg-orange-700 text-white rounded-lg font-semibold transition-colors disabled:opacity-75 disabled:cursor-not-allowed">
+                            <span id="career-btn-text">Submit Application</span>
+                            <span id="career-btn-loading" class="hidden flex items-center">
+                                <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                                Submitting...
+                            </span>
+                        </button>
+                    </div>
+                </form>
+                
+                <!-- Success Message -->
+                <div id="career-success" class="hidden mt-4 p-4 bg-green-50 border border-green-200 rounded-lg">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                        </svg>
+                        <span class="text-green-800 font-medium">Your application has been submitted successfully</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WhatsApp Business Float Button -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <a href="https://wa.me/919667609655?text=Hello%20AugIx%20Sys%20Team!%20I%20am%20interested%20in%20your%20enterprise%20solutions.%20Please%20provide%20me%20with%20more%20information." target="_blank" class="whatsapp-float bg-green-500 hover:bg-green-600 text-white w-14 h-14 rounded-full shadow-lg transition-all duration-300 flex items-center justify-center relative group">
+            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+            </svg>
+            <!-- Tooltip that appears on hover -->
+            <div class="absolute right-16 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                WhatsApp Business
+                <div class="absolute top-1/2 -right-1 transform -translate-y-1/2 w-2 h-2 bg-gray-800 rotate-45"></div>
+            </div>
+        </a>
+    </div>
+
+
+
+    <!-- Footer -->
+    <footer class="gradient-bg text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">AugIx System</h3>
+                    <p class="text-gray-300 mb-4">Innovating Enterprise Solutions with Modern Technology</p>
+                    <p class="text-sm text-gray-400">Automate intelligently. Scale effortlessly.</p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" onclick="showSection('home')" class="text-gray-300 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#" onclick="showSection('about')" class="text-gray-300 hover:text-white transition-colors">About</a></li>
+                        <li><a href="#" onclick="showSection('services')" class="text-gray-300 hover:text-white transition-colors">Services</a></li>
+                        <li><a href="#" onclick="showSection('contact')" class="text-gray-300 hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact Info</h4>
+                    <div class="space-y-2 text-gray-300">
+                        <p>📍 Noida, Uttar Pradesh</p>
+                        <p>📞 <a href="tel:+919667609655" class="hover:text-white">+91 9667609655</a></p>
+                        <p>✉️ <a href="mailto:info@augixsys.com" class="hover:text-white">info@augixsys.com</a></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-600 mt-8 pt-8 text-center">
+                <p class="text-gray-300">&copy; 2025 AugIx Sys LLP. All rights reserved. | LLP ID: ACR-1200 | PAN: ACLFA2847A</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize EmailJS
+        (function() {
+            emailjs.init("YOUR_PUBLIC_KEY"); // You'll need to replace this with your actual EmailJS public key
+        })();
+
+        // Biography toggle function
+        function toggleBio() {
+            const bioPreview = document.getElementById('bio-preview');
+            const bioFull = document.getElementById('bio-full');
+            
+            if (bioPreview.classList.contains('hidden')) {
+                // Show preview, hide full
+                bioPreview.classList.remove('hidden');
+                bioFull.classList.add('hidden');
+            } else {
+                // Show full, hide preview
+                bioPreview.classList.add('hidden');
+                bioFull.classList.remove('hidden');
+            }
+        }
+
+        // Section navigation system
+        function showSection(sectionName) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.page-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            const targetSection = document.getElementById(sectionName);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+            
+            // Update navigation active state
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            const activeNavLink = document.querySelector(`[data-section="${sectionName}"]`);
+            if (activeNavLink) {
+                activeNavLink.classList.add('active');
+            }
+            
+            // Close mobile menu if open
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenu) {
+                mobileMenu.classList.add('hidden');
+            }
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Dropdown menu functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const aboutNav = document.getElementById('about-nav');
+            const aboutDropdown = document.getElementById('about-dropdown');
+            const dropdownItems = document.querySelectorAll('.dropdown-item');
+            
+            // Show dropdown on hover
+            if (aboutNav && aboutDropdown) {
+                aboutNav.parentElement.addEventListener('mouseenter', function() {
+                    aboutDropdown.classList.add('show');
+                });
+                
+                // Hide dropdown when leaving the nav item
+                aboutNav.parentElement.addEventListener('mouseleave', function() {
+                    aboutDropdown.classList.remove('show');
+                });
+            }
+            
+            // Handle dropdown item clicks
+            dropdownItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // Remove active class from all items
+                    dropdownItems.forEach(i => i.classList.remove('active'));
+                    // Add active class to clicked item
+                    this.classList.add('active');
+                    
+                    const section = this.getAttribute('data-section');
+                    if (section === 'company') {
+                        // Show about section with company content
+                        showSection('about');
+                        document.getElementById('company-section').classList.remove('hidden');
+                        document.getElementById('team-section').classList.add('hidden');
+                    } else if (section === 'team') {
+                        // Show about section with team content
+                        showSection('about');
+                        document.getElementById('company-section').classList.add('hidden');
+                        document.getElementById('team-section').classList.remove('hidden');
+                    } else if (section === 'career') {
+                        // Open career modal popup
+                        openCareerModal();
+                    }
+                    
+                    // Hide dropdown after click
+                    aboutDropdown.classList.remove('show');
+                });
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        // Contact Form Handler
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.getElementById('contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const submitBtn = document.getElementById('submit-btn');
+                    const btnText = document.getElementById('btn-text');
+                    const btnLoading = document.getElementById('btn-loading');
+                    const successMsg = document.getElementById('contact-success');
+                    
+                    // Hide previous success message
+                    successMsg.classList.add('hidden');
+                    
+                    // Show loading state
+                    btnText.classList.add('hidden');
+                    btnLoading.classList.remove('hidden');
+                    submitBtn.disabled = true;
+                    
+                    const formData = new FormData(this);
+                    const name = formData.get('name');
+                    const email = formData.get('email');
+                    const phone = formData.get('phone') || 'Not provided';
+                    const message = formData.get('message');
+                    
+                    // Create mailto link with form data
+                    const subject = encodeURIComponent(`Contact Form: ${name} - Enterprise Solutions Inquiry`);
+                    const body = encodeURIComponent(`Hello AugIx System Team,
+
+I am reaching out regarding your enterprise solutions and would like to discuss my requirements.
+
+CONTACT DETAILS:
+Name: ${name}
+Email: ${email}
+Phone: ${phone}
+
+MESSAGE:
+${message}
+
+I am interested in learning more about your business automation solutions and would appreciate a consultation to discuss how AugIx System can help with my organization's needs.
+
+Please contact me at your earliest convenience.
+
+Best regards,
+${name}`);
+                    
+                    // IMMEDIATELY open email client - NO DELAY
+                    const mailtoLink = `mailto:info@augixsys.com?subject=${subject}&body=${body}`;
+                    window.open(mailtoLink, '_self');
+                    
+                    // Reset button state after short delay
+                    setTimeout(() => {
+                        btnText.classList.remove('hidden');
+                        btnLoading.classList.add('hidden');
+                        submitBtn.disabled = false;
+                        
+                        // Show success message
+                        successMsg.classList.remove('hidden');
+                        successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                        
+                        // Reset form
+                        contactForm.reset();
+                        
+                        // Auto-hide success message after 6 seconds
+                        setTimeout(() => {
+                            successMsg.classList.add('hidden');
+                        }, 6000);
+                        
+                    }, 500);
+                });
+            }
+        });
+
+        // Career Modal Functions
+        function openCareerModal() {
+            document.getElementById('career-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCareerModal() {
+            document.getElementById('career-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Career Form Handler
+        function handleCareerForm() {
+            const careerForm = document.getElementById('career-form');
+            if (careerForm) {
+                careerForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const submitBtn = document.getElementById('career-submit-btn');
+                    const btnText = document.getElementById('career-btn-text');
+                    const btnLoading = document.getElementById('career-btn-loading');
+                    const successMsg = document.getElementById('career-success');
+                    
+                    // Hide previous success message
+                    successMsg.classList.add('hidden');
+                    
+                    // Show loading state
+                    btnText.classList.add('hidden');
+                    btnLoading.classList.remove('hidden');
+                    submitBtn.disabled = true;
+                    
+                    const formData = new FormData(this);
+                    const name = formData.get('name');
+                    const email = formData.get('email');
+                    const phone = formData.get('phone');
+                    const location = formData.get('location');
+                    const position = formData.get('position');
+                    const experience = formData.get('experience');
+                    const salary = formData.get('salary');
+                    const skills = formData.get('skills');
+                    const whyJoin = formData.get('why-join');
+                    const resumeFile = formData.get('resume');
+                    
+                    // Create career email
+                    const subject = encodeURIComponent(`Career Application: ${name} - ${position} Position`);
+                    const body = encodeURIComponent(`Hello AugIx System HR Team,
+
+I am submitting my application for the ${position} position at AugIx System.
+
+APPLICANT DETAILS:
+Full Name: ${name}
+Email Address: ${email}
+Phone Number: ${phone}
+Current Location: ${location}
+Position Applied For: ${position}
+Experience Level: ${experience}
+Expected Salary: ${salary}
+
+KEY SKILLS:
+${skills}
+
+WHY I WANT TO JOIN AUGIX SYSTEM:
+${whyJoin}
+
+RESUME: ${resumeFile ? resumeFile.name + ' (Please find attached - PDF file)' : 'No resume uploaded'}
+
+I am excited about the opportunity to contribute to AugIx System's mission of enterprise automation and would welcome the chance to discuss my qualifications further.
+
+Thank you for considering my application.
+
+Best regards,
+${name}
+${email}
+${phone}`);
+                    
+                    // IMMEDIATELY open email client
+                    const mailtoLink = `mailto:info@augixsys.com?subject=${subject}&body=${body}`;
+                    window.open(mailtoLink, '_self');
+                    
+                    // Reset button state after short delay
+                    setTimeout(() => {
+                        btnText.classList.remove('hidden');
+                        btnLoading.classList.add('hidden');
+                        submitBtn.disabled = false;
+                        
+                        // Show success message
+                        successMsg.classList.remove('hidden');
+                        
+                        // Reset form
+                        careerForm.reset();
+                        document.getElementById('resume-file-name').textContent = '';
+                        document.getElementById('file-error').classList.add('hidden');
+                        
+                        // Close modal after success
+                        setTimeout(() => {
+                            closeCareerModal();
+                            successMsg.classList.add('hidden');
+                        }, 3000);
+                        
+                    }, 500);
+                });
+            }
+        }
+
+        // File upload handler with validation
+        function handleFileUpload() {
+            const fileInput = document.getElementById('resume');
+            const fileName = document.getElementById('resume-file-name');
+            const fileError = document.getElementById('file-error');
+            
+            if (fileInput && fileName) {
+                fileInput.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    
+                    // Clear previous messages
+                    fileName.textContent = '';
+                    fileError.textContent = '';
+                    fileError.classList.add('hidden');
+                    
+                    if (file) {
+                        // Check file type
+                        if (file.type !== 'application/pdf') {
+                            fileError.textContent = 'Please select a PDF file only.';
+                            fileError.classList.remove('hidden');
+                            fileInput.value = '';
+                            return;
+                        }
+                        
+                        // Check file size (4MB = 4 * 1024 * 1024 bytes)
+                        const maxSize = 4 * 1024 * 1024;
+                        if (file.size > maxSize) {
+                            fileError.textContent = 'File size must be less than 4MB.';
+                            fileError.classList.remove('hidden');
+                            fileInput.value = '';
+                            return;
+                        }
+                        
+                        // File is valid
+                        fileName.textContent = `✓ ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`;
+                    }
+                });
+            }
+        }
+
+        // Initialize career functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            handleCareerForm();
+            handleFileUpload();
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97ffad35b7ca5a1e',t:'MTc1ODAxODUwMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
